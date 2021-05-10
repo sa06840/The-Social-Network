@@ -14,7 +14,7 @@ def readcsv(filename):
     return matrix
 
 def constructing_social_network(matrix):
-    social_network = []
+    social_network = {}
     for i in matrix[0]:
         if i != '':
             social_network[i] = []
