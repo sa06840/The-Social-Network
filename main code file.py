@@ -28,3 +28,5 @@ filename = 'friendships.csv'
 matrix = readcsv(filename)
 print('Social Network: ')
 print(constructing_social_network(matrix), '\n')
+
+#checking friends list
