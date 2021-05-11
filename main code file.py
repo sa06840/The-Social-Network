@@ -30,3 +30,13 @@ print('Social Network: ')
 print(constructing_social_network(matrix), '\n')
 
 #checking friends list
+def get_friends_list(social_network,user):
+    friends_list= []
+    for i in social_network[user]:
+        friend = i[0]
+        friends_list.append(friend)
+    return friends_list 
+
+social_network = constructing_social_network(matrix)
+user = "Shah Jamal Alam"
+print("Friends of" + str(user) + ': ' + str(get_friends_list(social_network, user)), '\n')
