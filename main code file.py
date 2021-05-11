@@ -39,4 +39,6 @@ def get_friends_list(social_network,user):
 
 social_network = constructing_social_network(matrix)
 user = "Shah Jamal Alam"
-print("Friends of" + str(user) + ': ' + str(get_friends_list(social_network, user)), '\n')
+print("Friends of " + str(user) + ': ' + str(get_friends_list(social_network, user)), '\n')
+
+# functions
