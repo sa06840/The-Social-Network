@@ -65,3 +65,42 @@ def get_mutual_friends(social_network, user1, user2):
 
 user2 = 'Waqar Saleem'
 print('Mutual Friends of ' + str(user) + ' and ' + str(user2) + ': ' + str(get_mutual_friends(social_network, user, user2)), '\n')
+
+
+
+#Constructing User Profiles
+
+def readcsv(filename):
+    matrix = []
+    with open(filename, 'r') as file:
+        reader = csv.reader(file)
+        for row in reader:
+            matrix.append(row)
+    return matrix
+
+def constructing_profiles(matrix):
+    profiles = {}
+    for i in range(1, len(matrix[0])):
+        for j in range(1, len(matrix)):
+            if not(matrix[0][i] in profiles):
+                profiles[matrix[0][i]] = [(matrix[j][0], matrix[j][i])]
+            else:
+                profiles[matrix[0][i]].append((matrix[j][0], matrix[j][i]))
+    return profiles
+
+filename = 'profiles.csv'
+matrix_of_profiles = readcsv(filename)
+print('Profiles: ')
+print(constructing_profiles(matrix_of_profiles), '\n')
+
+
+
+#Getting User's Profile
+
+def get_user_profile(profiles, user):
+    print('Profile of ' + user + ': ')
+    for i in profiles[user]:
+        print(i[0] + ': ' + i[1])
+
+profiles = constructing_profiles(matrix_of_profiles)
+get_user_profile(profiles, user)
