@@ -1,6 +1,8 @@
 
 #Mini Facebook
 
+
+
 #Constructing Social Network
 
 import csv
@@ -25,19 +27,41 @@ def constructing_social_network(matrix):
     return social_network
 
 filename = 'friendships.csv'
-matrix = readcsv(filename)
+matrix_of_friendships = readcsv(filename)
 print('Social Network: ')
-print(constructing_social_network(matrix), '\n')
+print(constructing_social_network(matrix_of_friendships), '\n')
 
-#checking friends list
-def get_friends_list(social_network,user):
+
+
+#User
+
+user = 'Shah Jamal Alam'
+
+
+
+#Checking Friends List
+
+def get_friends_list(social_network, user):
     friends_list= []
     for i in social_network[user]:
         friend = i[0]
         friends_list.append(friend)
     return friends_list 
 
-social_network = constructing_social_network(matrix)
-user = "Shah Jamal Alam"
+social_network = constructing_social_network(matrix_of_friendships)
 print("Friends of " + str(user) + ': ' + str(get_friends_list(social_network, user)), '\n')
 
+
+
+#Checking Mutual Friends
+
+def get_mutual_friends(social_network, user1, user2):
+    mutual_friends = []
+    user1_friends = get_friends_list(social_network, user1)
+    for i in social_network[user2]:
+        if i[0] in user1_friends:
+            mutual_friends.append(i[0])
+    return mutual_friends
+
+user2 = 'Waqar Saleem'
+print('Mutual Friends of ' + str(user) + ' and ' + str(user2) + ': ' + str(get_mutual_friends(social_network, user, user2)), '\n')
