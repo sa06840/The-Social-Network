@@ -175,3 +175,60 @@ def get_recommended_friends(social_network, profiles, user):
 
 print('Recommended Friends for ' + str(user) + ': ')
 get_recommended_friends(social_network, profiles, user)
+print('\n')
+
+
+
+#User's Connection
+
+def get_users_connection(social_network, user, target_user):
+    cost = {}
+    unknown = []
+    path = []
+    parent = {}
+    lst_of_lowest = []
+    for node in social_network:
+        cost[node] = 100000
+        unknown.append(node)
+    cost[user] = 0
+    while not(is_empty(unknown)):
+        lowest = None
+        for node in unknown:
+            if lowest is None:
+                lowest = node
+            elif cost[node] < cost[lowest]:
+                lowest = node
+        unknown.remove(lowest)
+        lst_of_lowest.append(lowest)
+        for neighbour in get_neighbours(social_network, lowest):
+            c1 = cost[lowest] + neighbour[1]
+            c2 = cost[neighbour[0]]
+            if c1 < c2:
+                cost[neighbour[0]] = c1
+                parent[neighbour[0]] = lowest
+    lst_of_lowest.remove(user)
+    for i in lst_of_lowest:
+        path.append((parent[i], i))
+    for i in range(len(path)):
+        if path[i][0] == user and path[i][1] == target_user:
+            result = []
+            result.append(path[i])
+            return result
+        elif path[i][1] == target_user:
+            path[i], path[len(path)-1] = path[len(path)-1], path[i]
+            break
+    shortest_path = []
+    reversed_path = []
+    for i in range(len(path), 0, -1):
+        reversed_path.append(path[i-1])
+    edge = reversed_path[0]
+    shortest_path.append(edge)
+    for i in reversed_path:
+        if edge[0] == i[1]:
+            shortest_path.insert(0, i)
+            edge = i
+            if i[0] == user:
+                return shortest_path
+
+target_user = 'Rameez Ragheb'
+print('Path from ' + user + ' to ' + target_user + ': ' + str(get_users_connection(social_network, user, target_user)))
