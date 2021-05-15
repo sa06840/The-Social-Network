@@ -24,6 +24,37 @@ def get_neighbours(G, node):
         neighbours.append(i)
     return neighbours
 
+def get_cost(social_network, profiles, user):
+    cost = {}
+    unknown = []
+    for node in social_network:
+        cost[node] = 100000
+        unknown.append(node)
+    cost[user] = 0
+    while not(is_empty(unknown)):
+        lowest = None
+        for node in unknown:
+            if lowest is None:
+                lowest = node
+            elif cost[node] < cost[lowest]:
+                lowest = node
+        unknown.remove(lowest)
+        for neighbour in get_neighbours(social_network, lowest):
+            c1 = cost[lowest] + neighbour[1]
+            c2 = cost[neighbour[0]]
+            if c1 < c2:
+                cost[neighbour[0]] = c1
+    user_profile = get_profile_in_list(profiles, user)
+    for i in cost:
+        counter = 0
+        i_profile = get_profile_in_list(profiles, i)
+        for j in user_profile:
+            if j in i_profile:
+                counter = counter + 1
+        new_cost = cost[i] - counter
+        cost[i] = new_cost
+    return cost
+
 
 
 #Constructing Social Network
@@ -231,4 +262,32 @@ def get_users_connection(social_network, user, target_user):
                 return shortest_path
 
 target_user = 'Rameez Ragheb'
-print('Path from ' + user + ' to ' + target_user + ': ' + str(get_users_connection(social_network, user, target_user)))
+print('Path from ' + user + ' to ' + target_user + ': ' + str(get_users_connection(social_network, user, target_user)), '\n')
+
+
+
+#Add a Friend
+
+def add_friend(social_network, profiles, user, friend):
+    cost_dictionary = get_cost(social_network, profiles, user)
+    cost = cost_dictionary[friend]
+    social_network[user].append((friend, cost))
+    return social_network
+
+friend = 'Sajal Rana'
+print('Social Network: ')
+print(add_friend(social_network, profiles, user, friend), '\n')
+
+
+
+#Remove a Friend
+
+def unfriend(social_network, user, remove_friend):
+    for i in social_network[user]:
+        if remove_friend == i[0]:
+            social_network[user].remove(i)
+    return social_network
+
+remove_friend = 'Waqar Saleem'
+print('Social Network: ')
+print(unfriend(social_network, user, remove_friend))
