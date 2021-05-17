@@ -90,7 +90,7 @@ print(constructing_social_network(matrix_of_friendships), '\n')
 #User
 
 user = 'Shah Jamal Alam'
-age = 35
+age = '35'
 country = 'New Zealand'
 department = 'Data Structures and Algorithms'
 hobbies = 'Cooking, Snooker'
@@ -206,10 +206,12 @@ def get_recommended_friends(social_network, profiles, user):
     for i in cost:
         counter = 0
         i_profile = get_profile_in_list(profiles, i)
-        for j in user_profile:
-            if j in i_profile:
+        for j in user_profile[1:]:
+            if j in i_profile[1:]:
                 counter = counter + 1
-        new_cost = cost[i] - counter
+        age_difference = abs(int(user_profile[0]) - int(i_profile[0]))
+        fixed_age_difference = age_difference//10
+        new_cost = cost[i] - counter + fixed_age_difference
         cost[i] = new_cost
     user_friends = get_friends_list(social_network, user)
     user_friends.append(user)
