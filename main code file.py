@@ -2,7 +2,6 @@
 #Mini Facebook
 
 
-#Helper Functions
 
 def get_profile_in_list(profiles, user):
     lst = []
