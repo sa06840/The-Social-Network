@@ -90,6 +90,10 @@ print(constructing_social_network(matrix_of_friendships), '\n')
 #User
 
 user = 'Shah Jamal Alam'
+age = 35
+country = 'New Zealand'
+department = 'Data Structures and Algorithms'
+hobbies = 'Cooking, Snooker'
 
 
 
@@ -142,10 +146,24 @@ def constructing_profiles(matrix):
                 profiles[matrix[0][i]].append((matrix[j][0], matrix[j][i]))
     return profiles
 
+def fixing_user_profile(profiles, user, age, country, department, hobbies):
+    for i in range(len(profiles[user])):
+        if profiles[user][i][0] == 'Age':
+            profiles[user][i] = ('Age', str(age))
+        elif profiles[user][i][0] == 'Country':
+            profiles[user][i] = ('Country', country)
+        elif profiles[user][i][0] == 'Department':
+            profiles[user][i] = ('Department', department)
+        elif profiles[user][i][0] == 'Hobbies':
+            profiles[user][i] = ('Hobbies', hobbies)
+    return profiles
+
 filename = 'profiles.csv'
 matrix_of_profiles = readcsv(filename)
+profiles_temp = constructing_profiles(matrix_of_profiles)
+profiles = fixing_user_profile(profiles_temp, user, age, country, department, hobbies)
 print('Profiles: ')
-print(constructing_profiles(matrix_of_profiles), '\n')
+print(profiles, '\n')
 
 
 
@@ -156,7 +174,6 @@ def get_user_profile(profiles, user):
     for i in profiles[user]:
         print(i[0] + ': ' + i[1])
 
-profiles = constructing_profiles(matrix_of_profiles)
 get_user_profile(profiles, user)
 print('\n')
 
