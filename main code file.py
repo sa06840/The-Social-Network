@@ -360,5 +360,13 @@ View_Friends=Button(F1, text='View My Friendlist', command="c", padx=13, pady=10
 View_Friends.grid(row=20,column=0,sticky=NSEW,padx=13,pady=10)
 View_Friends.bind('<Button-1>', button_get_friends_list)
 
+#Define a function to clear the Entry Widget Content
+def clear_text():
+   E1.delete(0, END), E2.delete(0, END), E3.delete(0, END), E4.delete(0, END)
+
+#Create a button to clear the Entry Widget
+clearButton = Button(F1,text="Clear", command=clear_text, font=('Helvetica bold',10))
+clearButton.grid(row=21,column=0,sticky=NSEW,padx=13,pady=10)
+
 
 root.mainloop()
