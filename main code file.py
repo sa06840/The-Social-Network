@@ -351,7 +351,8 @@ root.geometry('1300x1000')
 def ClearInfo():
     for widget in F2.winfo_children():
         widget.destroy()
-
+def clear_text():
+   E1.delete(0, END), E2.delete(0, END), E3.delete(0, END), E4.delete(0, END)
 
 Label(root, text="FriendsConnect", font=("Arial bold", 30), fg="black").pack()
 F1= Frame(root,borderwidth=2, relief="solid")
@@ -384,6 +385,9 @@ E5.grid(row=4,column=1,padx=13,pady=10)
 View_Friends=Button(F1, text='View My Friendlist', command="c", padx=13, pady=10)
 View_Friends.grid(row=20,column=0,sticky=NSEW,padx=13,pady=10)
 View_Friends.bind('<Button-1>', button_get_friends_list)
+
+clearButton = Button(F1,text="Clear Entry Data", command=clear_text, padx=13, pady=10)
+clearButton.grid(row=40,column=1,sticky=NSEW,padx=13,pady=10)
 
 Clear=Button(F1, text='Clear', command=ClearInfo, padx=13, pady=10)
 Clear.grid(row=40,column=0,sticky=NSEW,padx=13,pady=10)
