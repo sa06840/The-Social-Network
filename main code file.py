@@ -370,7 +370,7 @@ from PIL import ImageTk,Image
 root = Tk()
 root.title("MINI-FACEBOOK")
 root.geometry('1300x1000')
-root.configure(bg='light blue')
+# root.configure(bg='')
 
 
 #Button for Clearing Window
@@ -389,10 +389,10 @@ canvas1 = Canvas( root, width = 20, height = 20)
   
 # Display image
 canvas1.create_image( 0, 0, image = b)
-Label(root, image=b, width='2000', height='180', bg='sky blue').pack()
-F1= Frame(root,borderwidth=3, relief='sunken')
+Label(root, image=b, width='2000', height='180', bg='cornflower blue').pack()
+F1= Frame(root,borderwidth=2, relief='sunken', bg='cornflower blue', bd='15')
 F1.pack(side="left", expand=True, fill="both")
-F2= Frame(root,borderwidth=3, relief="sunken")
+F2= Frame(root,borderwidth=2, relief="sunken", bg='cornflower blue', bd='15')
 F2.pack(side="right", expand=True, fill="both")
 Label(F1,text="Enter Name:").grid(row=0,column=0)
 E1= Entry(F1,bd=2)
