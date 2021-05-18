@@ -172,7 +172,7 @@ filename = 'profiles.csv'
 matrix_of_profiles = readcsv(filename)
 profiles_temp = constructing_profiles(matrix_of_profiles)
 profiles = fixing_user_profile(profiles_temp, user, age, country, department, hobbies)
-print('Profiles: ')
+print('Profiles: oqba')
 print(profiles, '\n')
 
 
@@ -188,7 +188,8 @@ print('\n')
 
 
 #Button for getting user's profile
-
+print(profiles_temp)
+print('oqba')
 def button_get_user_profile(clicked):
     user = E1.get()
     filename = 'profiles.csv'
@@ -239,14 +240,27 @@ def get_recommended_friends(social_network, profiles, user):
         if i not in user_friends:
             recommended_friends.append((i, cost[i]))
     recommended_friends = sorted(recommended_friends, key=lambda item: item[1])
-    for i in range(1, len(recommended_friends)+1):
-        recommended_friend = recommended_friends[i-1][0]
-        print(str(i) + '. ' + recommended_friend)
+    return recommended_friends
+    # for i in range(1, len(recommended_friends)+1):
+    #     recommended_friend = recommended_friends[i-1][0]
+    #     print(str(i) + '. ' + recommended_friend)
 
 print('Recommended Friends for ' + str(user) + ': ')
 get_recommended_friends(social_network, profiles, user)
 print('\n')
 
+# Button for getting recommended friends
+def button_for_recommended_friends(clicked):
+    user=E1.get()
+    filename = 'friendships.csv'
+    matrix_of_friendships = readcsv(filename)
+    social_network = constructing_social_network(matrix_of_friendships)
+    profiles = fixing_user_profile(profiles_temp, user, age, country, department, hobbies)
+    res=get_recommended_friends(social_network, profiles, user)
+    label=Label(F2, text='Recommended Friends Of ' + user +' =' + str(res))
+    label.pack()
+
+    
 
 
 #User's Connection
@@ -335,7 +349,6 @@ print(unfriend(social_network, user, remove_friend))
 
 #GUI
 
-
 from tkinter import *
 import tkinter.messagebox
 from tkinter import ttk
@@ -382,6 +395,11 @@ Label(F1,text="Enter your Hobbies:").grid(row=4,column=0)
 E5= Entry(F1,bd=2)
 E5.grid(row=4,column=1,padx=13,pady=10)
 
+# w=Canvas(root, width='10',height='10')
+# w.pack()
+# filename=PhotoImage(file=('oqba.jpg'))
+# image=w.creat_image(50,50, anchor=NE, image=filename)
+
 
 View_Friends=Button(F1, text='View My Friendlist', command="c", padx=13, pady=10)
 View_Friends.grid(row=20,column=0,sticky=NSEW,padx=13,pady=10)
@@ -396,6 +414,10 @@ Clear.grid(row=40,column=0,sticky=NSEW,padx=13,pady=10)
 View_Profile=Button(F1, text='View Profile', command="c", padx=13, pady=10)
 View_Profile.grid(row=60,column=0,sticky=NSEW,padx=13,pady=10)
 View_Profile.bind('<Button-1>', button_get_user_profile)
+
+View_recommended_friends=Button(F1, text='Recommended Friends', command='c', padx=13, pady=10)
+View_recommended_friends.grid(row=80,column=0,sticky=NSEW,padx=13,pady=10)
+View_recommended_friends.bind('<Button-1>', button_for_recommended_friends)
 
 
 
