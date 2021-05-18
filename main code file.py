@@ -366,7 +366,7 @@ from tkinter import *
 import tkinter.messagebox
 from tkinter import ttk
 import pickle
-
+from PIL import ImageTk,Image  
 root = Tk()
 root.title("MINI-FACEBOOK")
 root.geometry('1300x1000')
@@ -381,13 +381,19 @@ def ClearInfo():
 def clear_text():
    E1.delete(0, END), E2.delete(0, END), E3.delete(0, END), E4.delete(0, END), E5.delete(0, END)
 
-Label(root, text="FriendsConnect", font=("Arial bold", 30), fg="black").pack()
-F1= Frame(root,borderwidth=2, relief="solid")
+# Label(root, text="FriendsConnect", font=("Arial bold", 30), fg="black").pack()
+b = PhotoImage(file = "fb.png")
+  
+# Create Canvas
+canvas1 = Canvas( root, width = 20, height = 20)
+  
+# Display image
+canvas1.create_image( 0, 0, image = b)
+Label(root, image=b, width='2000', height='180', bg='sky blue').pack()
+F1= Frame(root,borderwidth=3, relief='sunken')
 F1.pack(side="left", expand=True, fill="both")
-F2= Frame(root,borderwidth=2, relief="solid")
+F2= Frame(root,borderwidth=3, relief="sunken")
 F2.pack(side="right", expand=True, fill="both")
-# Label(F2, text="welcome", font=("Trebuchet",30)).grid(row=0,column=0)
-
 Label(F1,text="Enter Name:").grid(row=0,column=0)
 E1= Entry(F1,bd=2)
 E1.grid(row=0,column=1,padx=13,pady=10)
@@ -407,12 +413,6 @@ E4.grid(row=3,column=1,padx=13,pady=10)
 Label(F1,text="Enter your Hobbies:").grid(row=4,column=0)
 E5= Entry(F1,bd=2)
 E5.grid(row=4,column=1,padx=13,pady=10)
-
-
-# w=Canvas(root, width='10',height='10')
-# w.pack()
-# filename=PhotoImage(file=('oqba.jpg'))
-# image=w.creat_image(50,50, anchor=NE, image=filename)
 
 
 View_Friends=Button(F1, text='View My Friendlist', command="c", padx=13, pady=10)
@@ -440,3 +440,4 @@ View_recommended_friends.bind('<Button-1>', button_for_recommended_friends)
 
 
 root.mainloop()
+
