@@ -176,6 +176,20 @@ print('Profiles: oqba')
 print(profiles, '\n')
 
 
+#Button for saving profile
+
+def save_user_profile(clicked):
+    user = E1.get()
+    age = E2.get()
+    country = E3.get()
+    department = E4.get()
+    hobbies = E5.get()
+    profiles = fixing_user_profile(profiles_temp, user, age, country, department, hobbies)
+    res = profiles[user]
+    label = Label(F2, text = 'Profile of ' + user + ' = ' + str(res))
+    label.pack()
+
+
 #Getting Profile
 
 def get_user_profile(profiles, user):
@@ -188,14 +202,12 @@ print('\n')
 
 
 #Button for getting user's profile
+
 print(profiles_temp)
 print('oqba')
 def button_get_user_profile(clicked):
     user = E1.get()
-    filename = 'profiles.csv'
-    matrix_of_profiles = readcsv(filename)
-    profiles_temp = constructing_profiles(matrix_of_profiles)
-    res = profiles_temp[user]
+    res = profiles[user]
     label = Label(F2, text = 'Profile of ' + user + ' = ' + str(res))
     label.pack()
 
@@ -249,7 +261,9 @@ print('Recommended Friends for ' + str(user) + ': ')
 get_recommended_friends(social_network, profiles, user)
 print('\n')
 
+
 # Button for getting recommended friends
+
 def button_for_recommended_friends(clicked):
     user=E1.get()
     filename = 'friendships.csv'
@@ -260,7 +274,6 @@ def button_for_recommended_friends(clicked):
     label=Label(F2, text='Recommended Friends Of ' + user +' =' + str(res))
     label.pack()
 
-    
 
 
 #User's Connection
@@ -366,7 +379,7 @@ def ClearInfo():
     for widget in F2.winfo_children():
         widget.destroy()
 def clear_text():
-   E1.delete(0, END), E2.delete(0, END), E3.delete(0, END), E4.delete(0, END)
+   E1.delete(0, END), E2.delete(0, END), E3.delete(0, END), E4.delete(0, END), E5.delete(0, END)
 
 Label(root, text="FriendsConnect", font=("Arial bold", 30), fg="black").pack()
 F1= Frame(root,borderwidth=2, relief="solid")
@@ -375,7 +388,7 @@ F2= Frame(root,borderwidth=2, relief="solid")
 F2.pack(side="right", expand=True, fill="both")
 # Label(F2, text="welcome", font=("Trebuchet",30)).grid(row=0,column=0)
 
-Label(F1,text="Enter your Name:").grid(row=0,column=0)
+Label(F1,text="Enter Name:").grid(row=0,column=0)
 E1= Entry(F1,bd=2)
 E1.grid(row=0,column=1,padx=13,pady=10)
 
@@ -395,6 +408,7 @@ Label(F1,text="Enter your Hobbies:").grid(row=4,column=0)
 E5= Entry(F1,bd=2)
 E5.grid(row=4,column=1,padx=13,pady=10)
 
+
 # w=Canvas(root, width='10',height='10')
 # w.pack()
 # filename=PhotoImage(file=('oqba.jpg'))
@@ -402,21 +416,25 @@ E5.grid(row=4,column=1,padx=13,pady=10)
 
 
 View_Friends=Button(F1, text='View My Friendlist', command="c", padx=13, pady=10)
-View_Friends.grid(row=20,column=0,sticky=NSEW,padx=13,pady=10)
+View_Friends.grid(row=40,column=0,sticky=NSEW,padx=13,pady=10)
 View_Friends.bind('<Button-1>', button_get_friends_list)
 
 clearButton = Button(F1,text="Clear Entry Data", command=clear_text, padx=13, pady=10)
-clearButton.grid(row=40,column=1,sticky=NSEW,padx=13,pady=10)
+clearButton.grid(row=60,column=1,sticky=NSEW,padx=13,pady=10)
 
 Clear=Button(F1, text='Clear', command=ClearInfo, padx=13, pady=10)
-Clear.grid(row=40,column=0,sticky=NSEW,padx=13,pady=10)
+Clear.grid(row=60,column=0,sticky=NSEW,padx=13,pady=10)
+
+Save_Profile=Button(F1, text='Save Profile', command="c", padx=13, pady=10)
+Save_Profile.grid(row=80,column=0,sticky=NSEW,padx=13,pady=10)
+Save_Profile.bind('<Button-1>', save_user_profile)
 
 View_Profile=Button(F1, text='View Profile', command="c", padx=13, pady=10)
-View_Profile.grid(row=60,column=0,sticky=NSEW,padx=13,pady=10)
+View_Profile.grid(row=80,column=1,sticky=NSEW,padx=13,pady=10)
 View_Profile.bind('<Button-1>', button_get_user_profile)
 
 View_recommended_friends=Button(F1, text='Recommended Friends', command='c', padx=13, pady=10)
-View_recommended_friends.grid(row=80,column=0,sticky=NSEW,padx=13,pady=10)
+View_recommended_friends.grid(row=100,column=0,sticky=NSEW,padx=13,pady=10)
 View_recommended_friends.bind('<Button-1>', button_for_recommended_friends)
 
 
