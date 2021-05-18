@@ -344,6 +344,7 @@ import pickle
 root = Tk()
 root.title("MINI-FACEBOOK")
 root.geometry('1300x1000')
+root.configure(bg='light blue')
 
 
 #Button for Clearing Window
