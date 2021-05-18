@@ -3,7 +3,7 @@
 
 
 #Helper Functions
-# functions
+
 def get_profile_in_list(profiles, user):
     lst = []
     for i in profiles[user]:
@@ -176,8 +176,7 @@ print('Profiles: ')
 print(profiles, '\n')
 
 
-
-#Getting User's Profile
+#Getting Profile
 
 def get_user_profile(profiles, user):
     print('Profile of ' + user + ': ')
@@ -187,6 +186,17 @@ def get_user_profile(profiles, user):
 get_user_profile(profiles, user)
 print('\n')
 
+
+#Button for getting user's profile
+
+def button_get_user_profile(clicked):
+    user = E1.get()
+    filename = 'profiles.csv'
+    matrix_of_profiles = readcsv(filename)
+    profiles_temp = constructing_profiles(matrix_of_profiles)
+    res = profiles_temp[user]
+    label = Label(F2, text = 'Profile of ' + user + ' = ' + str(res))
+    label.pack()
 
 
 #Recommending Friends
@@ -336,11 +346,11 @@ root.title("MINI-FACEBOOK")
 root.geometry('1300x1000')
 
 
-# #Button for Clearing Window
+#Button for Clearing Window
 
-# def ClearInfo():
-#     for widget in F2.winfo_children():
-#         widget.destroy()
+def ClearInfo():
+    for widget in F2.winfo_children():
+        widget.destroy()
 
 
 Label(root, text="FriendsConnect", font=("Arial bold", 30), fg="black").pack()
@@ -362,23 +372,26 @@ Label(F1,text="Enter your Country:").grid(row=2,column=0)
 E3= Entry(F1,bd=2)
 E3.grid(row=2,column=1,padx=13,pady=10)
 
-Label(F1,text="Enter your Hobbies:").grid(row=3,column=0)
+Label(F1,text="Enter your Department:").grid(row=3,column=0)
 E4= Entry(F1,bd=2)
 E4.grid(row=3,column=1,padx=13,pady=10)
+
+Label(F1,text="Enter your Hobbies:").grid(row=4,column=0)
+E5= Entry(F1,bd=2)
+E5.grid(row=4,column=1,padx=13,pady=10)
+
 
 View_Friends=Button(F1, text='View My Friendlist', command="c", padx=13, pady=10)
 View_Friends.grid(row=20,column=0,sticky=NSEW,padx=13,pady=10)
 View_Friends.bind('<Button-1>', button_get_friends_list)
 
-# ClearInfo=Button(F1, text='Clear', command=ClearInfo, padx=13, pady=10)
-# ClearInfo.grid(row=40,column=0,sticky=NSEW,padx=13,pady=10)
+Clear=Button(F1, text='Clear', command=ClearInfo, padx=13, pady=10)
+Clear.grid(row=40,column=0,sticky=NSEW,padx=13,pady=10)
 
-#Define a function to clear the Entry Widget Content
-def clear_text():
-   E1.delete(0, END), E2.delete(0, END), E3.delete(0, END), E4.delete(0, END)
+View_Profile=Button(F1, text='View Profile', command="c", padx=13, pady=10)
+View_Profile.grid(row=60,column=0,sticky=NSEW,padx=13,pady=10)
+View_Profile.bind('<Button-1>', button_get_user_profile)
 
-#Create a button to clear the Entry Widget
-clearButton = Button(F1,text="Clear", command=clear_text, font=('Helvetica bold',10))
-clearButton.grid(row=21,column=0,sticky=NSEW,padx=13,pady=10)
+
 
 root.mainloop()
