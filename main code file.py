@@ -110,6 +110,16 @@ social_network = constructing_social_network(matrix_of_friendships)
 print("Friends of " + str(user) + ': ' + str(get_friends_list(social_network, user)), '\n')
 
 
+#Button For Viewing Friends
+
+def button_get_friends_list(clicked):
+    user = E1.get()
+    filename = 'friendships.csv'
+    matrix_of_friendships = readcsv(filename)
+    social_network = constructing_social_network(matrix_of_friendships)
+    res = get_friends_list(social_network, user)
+    label = Label(F2, text = 'Friends of ' + user + ' = ' + str(res))
+    label.pack()
 
 #Checking Mutual Friends
 
@@ -310,3 +320,45 @@ def unfriend(social_network, user, remove_friend):
 remove_friend = 'Waqar Saleem'
 print('Social Network: ')
 print(unfriend(social_network, user, remove_friend))
+
+#GUI
+
+from tkinter import *
+import tkinter.messagebox
+from tkinter import ttk
+import pickle
+
+root = Tk()
+root.title("MINI-FACEBOOK")
+root.geometry('1300x1000')
+
+
+Label(root, text="FriendsConnect", font=("Arial bold", 30), fg="black").pack()
+F1= Frame(root,borderwidth=2, relief="solid")
+F1.pack(side="left", expand=True, fill="both")
+F2= Frame(root,borderwidth=2, relief="solid")
+F2.pack(side="right", expand=True, fill="both")
+# Label(F2, text="welcome", font=("Trebuchet",30)).grid(row=0,column=0)
+
+Label(F1,text="Enter your Name:").grid(row=0,column=0)
+E1= Entry(F1,bd=2)
+E1.grid(row=0,column=1,padx=13,pady=10)
+
+Label(F1,text="Enter your Age:").grid(row=1,column=0)
+E2= Entry(F1,bd=2)
+E2.grid(row=1,column=1,padx=13,pady=10)
+
+Label(F1,text="Enter your Country:").grid(row=2,column=0)
+E3= Entry(F1,bd=2)
+E3.grid(row=2,column=1,padx=13,pady=10)
+
+Label(F1,text="Enter your Hobbies:").grid(row=3,column=0)
+E4= Entry(F1,bd=2)
+E4.grid(row=3,column=1,padx=13,pady=10)
+
+View_Friends=Button(F1, text='View My Friendlist', command="c", padx=13, pady=10)
+View_Friends.grid(row=20,column=0,sticky=NSEW,padx=13,pady=10)
+View_Friends.bind('<Button-1>', button_get_friends_list)
+
+
+root.mainloop()
