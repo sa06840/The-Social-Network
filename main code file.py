@@ -84,6 +84,7 @@ filename = 'friendships.csv'
 matrix_of_friendships = readcsv(filename)
 print('Social Network: ')
 print(constructing_social_network(matrix_of_friendships), '\n')
+social_network = constructing_social_network(matrix_of_friendships)
 
 
 
@@ -96,8 +97,53 @@ department = 'Data Structures and Algorithms'
 hobbies = 'Cooking, Snooker'
 
 
+#Add a Friend
+
+def add_friend(social_network, profiles, user, friend):
+    cost_dictionary = get_cost(social_network, profiles, user)
+    cost = cost_dictionary[friend]
+    social_network[user].append((friend, cost))
+    return social_network  
+
+
+#friend = 'Sajal Rana'
+#print('Social Network: ')
+#print(add_friend(social_network, profiles, user, friend), '\n')
+
+
+#Button for Adding a Friend
+
+def button_addfirend(clicked):
+    friend=E6.get()
+    user=E1.get()
+    add_friend(social_network, profiles, user, friend)
+
+
+
+#Remove a Friend
+
+def unfriend(social_network, user, remove_friend):
+    for i in social_network[user]:
+        if remove_friend == i[0]:
+            social_network[user].remove(i)
+    return social_network
+
+#remove_friend = 'Waqar Saleem'
+#print('Social Network: ')
+#print(unfriend(social_network, user, remove_friend))
+
+
+#Button for Removing a Friend
+
+def button_unfriend(clicked):
+    remove_friend = E6.get()
+    user = E1.get()
+    unfriend(social_network, user, remove_friend)
+
+
 
 #Checking Friends List
+
 
 def get_friends_list(social_network, user):
     friends_list= []
@@ -106,20 +152,28 @@ def get_friends_list(social_network, user):
         friends_list.append(friend)
     return friends_list 
 
-social_network = constructing_social_network(matrix_of_friendships)
-print("Friends of " + str(user) + ': ' + str(get_friends_list(social_network, user)), '\n')
+#social_network = constructing_social_network(matrix_of_friendships)
+#print("Friends of " + str(user) + ': ' + str(get_friends_list(social_network, user)), '\n')
 
 
 #Button For Viewing Friends
 
 def button_get_friends_list(clicked):
     user = E1.get()
-    filename = 'friendships.csv'
-    matrix_of_friendships = readcsv(filename)
-    social_network = constructing_social_network(matrix_of_friendships)
+    #filename = 'friendships.csv'
+    #matrix_of_friendships = readcsv(filename)
+    #social_network = constructing_social_network(matrix_of_friendships)
     res = get_friends_list(social_network, user)
-    label = Label(F2, text = 'Friends of ' + user + ' = ' + str(res))
-    label.pack()
+    my_listbox = Listbox(F2, width=50, height=20)
+    my_listbox.pack(pady = 15)
+    title = 'Friendlist of  ' + user + ': '
+    my_listbox.insert(0, title)
+    my_listbox.insert(1, '')
+    for i in range(0, len(res)):
+        ans = str(i+1) + '. ' + res[i]
+        my_listbox.insert('end', ans)
+    my_listbox.insert('end', '')
+    my_listbox.insert('end', 'Total Friends = ' + str(i+1))
 
 
 #Checking Mutual Friends
@@ -134,6 +188,7 @@ def get_mutual_friends(social_network, user1, user2):
 
 user2 = 'Waqar Saleem'
 print('Mutual Friends of ' + str(user) + ' and ' + str(user2) + ': ' + str(get_mutual_friends(social_network, user, user2)), '\n')
+
 
 
 #Constructing User Profiles
@@ -185,9 +240,15 @@ def save_user_profile(clicked):
     department = E4.get()
     hobbies = E5.get()
     profiles = fixing_user_profile(profiles_temp, user, age, country, department, hobbies)
-    res = profiles[user]
-    label = Label(F2, text = 'Profile of ' + user + ' = ' + str(res))
-    label.pack()
+    #res = profiles[user]
+    #my_listbox = Listbox(F2, width=50)
+    #my_listbox.pack(pady = 15)
+    #title = 'Profile of ' + user + ': '
+    #my_listbox.insert(0, title)
+    #my_listbox.insert(1, '')
+    #for item in res:
+        #ans = item[0] + ' = ' + item[1]
+        #my_listbox.insert('end', ans)
 
 
 #Getting Profile
@@ -206,8 +267,15 @@ print('\n')
 def button_get_user_profile(clicked):
     user = E1.get()
     res = profiles[user]
-    label = Label(F2, text = 'Profile of ' + user + ' = ' + str(res))
-    label.pack()
+    my_listbox = Listbox(F2, width=50)
+    my_listbox.pack(pady = 15)
+    title = 'Profile of ' + user + ': '
+    my_listbox.insert(0, title)
+    my_listbox.insert(1, '')
+    for item in res:
+        ans = item[0] + ' = ' + item[1]
+        my_listbox.insert('end', ans)
+    
 
 
 #Recommending Friends
@@ -251,10 +319,9 @@ def get_recommended_friends(social_network, profiles, user):
             recommended_friends.append((i, cost[i]))
     recommended_friends = sorted(recommended_friends, key=lambda item: item[1])
     return recommended_friends
-    # for i in range(1, len(recommended_friends)+1):
-    #     recommended_friend = recommended_friends[i-1][0]
-    #     print(str(i) + '. ' + recommended_friend)
 
+
+print(get_friends_list(social_network, 'Shah Jamal Alam'))
 print('Recommended Friends for ' + str(user) + ': ')
 get_recommended_friends(social_network, profiles, user)
 print('\n')
@@ -264,13 +331,19 @@ print('\n')
 
 def button_for_recommended_friends(clicked):
     user=E1.get()
-    filename = 'friendships.csv'
-    matrix_of_friendships = readcsv(filename)
-    social_network = constructing_social_network(matrix_of_friendships)
-    profiles = fixing_user_profile(profiles_temp, user, age, country, department, hobbies)
+    #filename = 'friendships.csv'
+    #matrix_of_friendships = readcsv(filename)
+    #social_network = constructing_social_network(matrix_of_friendships)
+    #profiles = fixing_user_profile(profiles_temp, user, age, country, department, hobbies)
     res=get_recommended_friends(social_network, profiles, user)
-    label=Label(F2, text='Recommended Friends Of ' + user +' =' + str(res))
-    label.pack()
+    my_listbox = Listbox(F2, width=50)
+    my_listbox.pack(pady = 15)
+    title = 'Recommended Friends for ' + user + ': '
+    my_listbox.insert(0, title)
+    my_listbox.insert(1, '')
+    for i in range(len(res)):
+        ans = str(i+1) + '. ' + res[i][0]
+        my_listbox.insert('end', ans)
 
 
 
@@ -332,51 +405,14 @@ print('Path from ' + user + ' to ' + target_user + ': ' + str(get_users_connecti
 
 
 
-#Add a Friend
-
-def add_friend(social_network, profiles, user, friend):
-    cost_dictionary = get_cost(social_network, profiles, user)
-    cost = cost_dictionary[friend]
-    social_network[user].append((friend, cost))
-    # lst=[]
-    # for i in social_network[user]:
-    return social_network[user]    
-
-friend = 'Sajal Rana'
-print('Social Network: ')
-print(add_friend(social_network, profiles, user, friend), '\n')
-
-
-
-#Remove a Friend
-
-def unfriend(social_network, user, remove_friend):
-    for i in social_network[user]:
-        if remove_friend == i[0]:
-            social_network[user].remove(i)
-    return social_network
-
-remove_friend = 'Waqar Saleem'
-print('Social Network: ')
-print(unfriend(social_network, user, remove_friend))
 
 
 from tkinter import *
 import tkinter.messagebox
 from tkinter import ttk
 import pickle
+
 # from PIL import ImageTk,Image  
-
-def button_addfirend(click):
-    friend=E6.get()
-    user=E1.get()
-    Label(F1, text='Enter your friend name').grid(row=40, column=2)
-    E6.grid(row=40,column=3,padx=13,pady=10)
-    social_network = constructing_social_network(matrix_of_friendships)
-    profiles = fixing_user_profile(profiles_temp, user, age, country, department, hobbies)
-    res=add_friend(social_network, profiles, user, friend)
-    label=Label(F2, text='New Friend List of' + user +' =' + str(res))
-
 
 
 #GUI
@@ -393,7 +429,7 @@ def ClearInfo():
     for widget in F2.winfo_children():
         widget.destroy()
 def clear_text():
-   E1.delete(0, END), E2.delete(0, END), E3.delete(0, END), E4.delete(0, END), E5.delete(0, END)
+   E1.delete(0, END), E2.delete(0, END), E3.delete(0, END), E4.delete(0, END), E5.delete(0, END), E6.delete(0, END)
 
 # Label(root, text="FriendsConnect", font=("Arial bold", 30), fg="black").pack()
 b = PhotoImage(file = "fb.png")
@@ -408,28 +444,30 @@ F1= Frame(root,borderwidth=2, relief='sunken', bg='#405898', bd='15')
 F1.pack(side="left", expand=True, fill="both")
 F2= Frame(root,borderwidth=2, relief="sunken", bg='#405898', bd='15')
 F2.pack(side="right", expand=True, fill="both")
-Label(F1,text="Enter Name:").grid(row=0,column=0)
+
+Label(F1,text="Enter your Name:").grid(row=0,column=0)
 E1= Entry(F1,bd=2)
 E1.grid(row=0,column=1,padx=13,pady=10)
 
-Label(F1,text="Enter your Age").grid(row=1,column=0)
+Label(F1,text="Enter your Age:").grid(row=1,column=0)
 E2= Entry(F1,bd=2)
 E2.grid(row=1,column=1,padx=13,pady=10)
 
-Label(F1,text="Enter your Country").grid(row=2,column=0)
+Label(F1,text="Enter your Country:").grid(row=2,column=0)
 E3= Entry(F1,bd=2)
 E3.grid(row=2,column=1,padx=13,pady=10)
 
-Label(F1,text="Enter your Department").grid(row=3,column=0)
+Label(F1,text="Enter your Department:").grid(row=3,column=0)
 E4= Entry(F1,bd=2)
 E4.grid(row=3,column=1,padx=13,pady=10)
 
-Label(F1,text="Enter your Hobbies").grid(row=4,column=0)
+Label(F1,text="Enter your Hobbies:").grid(row=4,column=0)
 E5= Entry(F1,bd=2)
 E5.grid(row=4,column=1,padx=13,pady=10)
 
-# Label(F1, text='Enter your friend name').grid(row=40, column=2)
+Label(F1, text="Enter your friend name's:").grid(row=4, column=2)
 E6=Entry(F1,bd=2)
+E6.grid(row=4,column=3,padx=13,pady=10)
 
 View_Friends=Button(F1, text='View My Friendlist', command="c", padx=13, pady=10)
 View_Friends.grid(row=40,column=0,sticky=NSEW,padx=13,pady=10)
@@ -456,5 +494,10 @@ View_recommended_friends.bind('<Button-1>', button_for_recommended_friends)
 Add_friend=Button(F1, text='Add Friend', command='c', padx=13, pady=10)
 Add_friend.grid(row=40,column=1,sticky=NSEW,padx=13,pady=10)
 Add_friend.bind('<Button-1>', button_addfirend)
+
+Unfriend=Button(F1, text='Unfriend', command='c', padx=13, pady=10)
+Unfriend.grid(row=40,column=2,sticky=NSEW,padx=13,pady=10)
+Unfriend.bind('<Button-1>', button_unfriend)
+
 root.mainloop()
 
