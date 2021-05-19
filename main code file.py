@@ -189,6 +189,23 @@ def get_mutual_friends(social_network, user1, user2):
 user2 = 'Waqar Saleem'
 print('Mutual Friends of ' + str(user) + ' and ' + str(user2) + ': ' + str(get_mutual_friends(social_network, user, user2)), '\n')
 
+#Button for Getting Mutual Friends
+
+def button_get_mutual_friends(clicked):
+    user1 = E1.get()
+    user2 = E6.get()
+    res = get_mutual_friends(social_network, user1, user2)
+    my_listbox = Listbox(F2, width=50, height=20)
+    my_listbox.pack(pady = 15)
+    title = 'Mutual Friends of  ' + user1 + ' and ' + user2 + ': '
+    my_listbox.insert(0, title)
+    my_listbox.insert(1, '')
+    for i in range(0, len(res)):
+        ans = str(i+1) + '. ' + res[i]
+        my_listbox.insert('end', ans)
+    my_listbox.insert('end', '')
+    my_listbox.insert('end', 'Total Mutual Friends = ' + str(i+1))
+
 
 
 #Constructing User Profiles
@@ -403,6 +420,20 @@ print('Path from ' + user + ' to ' + target_user + ': ' + str(get_users_connecti
 
 # button for user connection
 
+def button_get_users_connection(clicked):
+    user = E1.get()
+    target_user = E6.get()
+    res = get_users_connection(social_network, user, target_user)
+    my_listbox = Listbox(F2, width=50)
+    my_listbox.pack(pady = 15)
+    title = 'Path from ' + user + ' to  ' + target_user
+    my_listbox.insert(0, title)
+    my_listbox.insert(1, '')
+    for i in range(len(res)):
+        ans = str(i+1) + '. ' + res[i][0]
+        my_listbox.insert('end', ans)
+    last = str(i+2) + '. ' + target_user
+    my_listbox.insert('end', last)
 
 
 
@@ -498,6 +529,14 @@ Add_friend.bind('<Button-1>', button_addfirend)
 Unfriend=Button(F1, text='Unfriend', command='c', padx=13, pady=10)
 Unfriend.grid(row=40,column=2,sticky=NSEW,padx=13,pady=10)
 Unfriend.bind('<Button-1>', button_unfriend)
+
+View_Mutual_Friends=Button(F1, text='Mutual Friends', command='c', padx=13, pady=10)
+View_Mutual_Friends.grid(row=100,column=1,sticky=NSEW,padx=13,pady=10)
+View_Mutual_Friends.bind('<Button-1>', button_get_mutual_friends)
+
+View_Users_Connection=Button(F1, text="User's Connection", command='c', padx=13, pady=10)
+View_Users_Connection.grid(row=100,column=2,sticky=NSEW,padx=13,pady=10)
+View_Users_Connection.bind('<Button-1>', button_get_users_connection)
 
 root.mainloop()
 
