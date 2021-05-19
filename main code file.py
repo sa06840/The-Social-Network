@@ -203,8 +203,6 @@ print('\n')
 
 #Button for getting user's profile
 
-print(profiles_temp)
-print('oqba')
 def button_get_user_profile(clicked):
     user = E1.get()
     res = profiles[user]
@@ -330,6 +328,8 @@ def get_users_connection(social_network, user, target_user):
 target_user = 'Rameez Ragheb'
 print('Path from ' + user + ' to ' + target_user + ': ' + str(get_users_connection(social_network, user, target_user)), '\n')
 
+# button for user connection
+
 
 
 #Add a Friend
@@ -338,7 +338,9 @@ def add_friend(social_network, profiles, user, friend):
     cost_dictionary = get_cost(social_network, profiles, user)
     cost = cost_dictionary[friend]
     social_network[user].append((friend, cost))
-    return social_network
+    # lst=[]
+    # for i in social_network[user]:
+    return social_network[user]    
 
 friend = 'Sajal Rana'
 print('Social Network: ')
@@ -359,14 +361,26 @@ print('Social Network: ')
 print(unfriend(social_network, user, remove_friend))
 
 
-
-#GUI
-
 from tkinter import *
 import tkinter.messagebox
 from tkinter import ttk
 import pickle
 from PIL import ImageTk,Image  
+
+def button_addfirend(click):
+    friend=E6.get()
+    user=E1.get()
+    Label(F1, text='Enter your friend name').grid(row=40, column=2)
+    E6.grid(row=40,column=3,padx=13,pady=10)
+    social_network = constructing_social_network(matrix_of_friendships)
+    profiles = fixing_user_profile(profiles_temp, user, age, country, department, hobbies)
+    res=add_friend(social_network, profiles, user, friend)
+    label=Label(F2, text='New Friend List of' + user +' =' + str(res))
+
+
+
+#GUI
+
 root = Tk()
 root.title("MINI-FACEBOOK")
 root.geometry('1300x1000')
@@ -398,22 +412,24 @@ Label(F1,text="Enter Name:").grid(row=0,column=0)
 E1= Entry(F1,bd=2)
 E1.grid(row=0,column=1,padx=13,pady=10)
 
-Label(F1,text="Enter your Age:").grid(row=1,column=0)
+Label(F1,text="Enter your Age").grid(row=1,column=0)
 E2= Entry(F1,bd=2)
 E2.grid(row=1,column=1,padx=13,pady=10)
 
-Label(F1,text="Enter your Country:").grid(row=2,column=0)
+Label(F1,text="Enter your Country").grid(row=2,column=0)
 E3= Entry(F1,bd=2)
 E3.grid(row=2,column=1,padx=13,pady=10)
 
-Label(F1,text="Enter your Department:").grid(row=3,column=0)
+Label(F1,text="Enter your Department").grid(row=3,column=0)
 E4= Entry(F1,bd=2)
 E4.grid(row=3,column=1,padx=13,pady=10)
 
-Label(F1,text="Enter your Hobbies:").grid(row=4,column=0)
+Label(F1,text="Enter your Hobbies").grid(row=4,column=0)
 E5= Entry(F1,bd=2)
 E5.grid(row=4,column=1,padx=13,pady=10)
 
+# Label(F1, text='Enter your friend name').grid(row=40, column=2)
+E6=Entry(F1,bd=2)
 
 View_Friends=Button(F1, text='View My Friendlist', command="c", padx=13, pady=10)
 View_Friends.grid(row=40,column=0,sticky=NSEW,padx=13,pady=10)
@@ -437,7 +453,8 @@ View_recommended_friends=Button(F1, text='Recommended Friends', command='c', pad
 View_recommended_friends.grid(row=100,column=0,sticky=NSEW,padx=13,pady=10)
 View_recommended_friends.bind('<Button-1>', button_for_recommended_friends)
 
-
-
+Add_friend=Button(F1, text='Add Friend', command='c', padx=13, pady=10)
+Add_friend.grid(row=40,column=1,sticky=NSEW,padx=13,pady=10)
+Add_friend.bind('<Button-1>', button_addfirend)
 root.mainloop()
 
