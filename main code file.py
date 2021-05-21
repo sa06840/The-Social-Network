@@ -307,10 +307,19 @@ print(profiles, '\n')
 def save_user_profile(clicked):
     user = E1.get()
     user = case_sensitivity(user)
+    if user == '':
+        label = Label(F2, text = 'Please enter a your name.')
+        label.pack()
+        return
     age = E2.get()
-    if age.isdigit() == False and age != '':
+    if '-' in age:
+        label = Label(F2, text = 'Please enter a valid age.')
+        label.pack()
+        return
+    elif age.isdigit() == False and age != '':
         label = Label(F2, text = 'Please enter a number for your age.')
         label.pack()
+        return
     country = E3.get()
     country = case_sensitivity(country)
     department = E4.get()
@@ -399,8 +408,10 @@ def get_recommended_friends(social_network, profiles, user):
         for j in user_profile[1:]:
             if j in i_profile[1:]:
                 counter = counter + 1
-        age_difference = abs(int(user_profile[0]) - int(i_profile[0]))
-        fixed_age_difference = age_difference//10
+        fixed_age_difference = 0
+        if user_profile[0] != '':
+            age_difference = abs(int(user_profile[0]) - int(i_profile[0]))
+            fixed_age_difference = age_difference//10
         new_cost = cost[i] - counter + fixed_age_difference
         cost[i] = new_cost
     user_friends = get_friends_list(social_network, user)
@@ -427,7 +438,7 @@ def button_for_recommended_friends(clicked):
         user_not_in_socialnetwork(user)
         return
     res=get_recommended_friends(social_network, profiles, user)
-    my_listbox = Listbox(F2, width=50)
+    my_listbox = Listbox(F2, width=50, height = 20)
     my_listbox.pack(pady = 15)
     title = 'Recommended Friends for ' + user + ': '
     my_listbox.insert(0, title)
@@ -503,7 +514,7 @@ def button_get_users_connection(clicked):
         user_not_in_socialnetwork(target_user)
         return
     res = get_users_connection(social_network, user, target_user)
-    my_listbox = Listbox(F2, width=50)
+    my_listbox = Listbox(F2, width=50, height=20)
     my_listbox.pack(pady = 15)
     title = 'Path from ' + user + ' to  ' + target_user
     my_listbox.insert(0, title)
@@ -511,6 +522,8 @@ def button_get_users_connection(clicked):
     for i in range(len(res)):
         ans = str(i+1) + '. ' + res[i][0]
         my_listbox.insert('end', ans)
+        my_listbox.insert('end', '              |')
+        my_listbox.insert('end', '             V')
     last = str(i+2) + '. ' + target_user
     my_listbox.insert('end', last)
 
