@@ -463,78 +463,94 @@ def clear_text():
    E1.delete(0, END), E2.delete(0, END), E3.delete(0, END), E4.delete(0, END), E5.delete(0, END), E6.delete(0, END)
 
 # Label(root, text="FriendsConnect", font=("Arial bold", 30), fg="black").pack()
-b = PhotoImage(file = "fb.png")
+b = PhotoImage(file = "socialnetwork1.png")
   
 # Create Canvas
 canvas1 = Canvas( root, width = 20, height = 20)
   
 # Display image
 canvas1.create_image( 0, 0, image = b)
-Label(root, image=b, width='2000', height='180', bg='#405898').pack()
-F1= Frame(root,borderwidth=2, relief='sunken', bg='#405898', bd='15')
+Label(root, image=b, width='2000', height='125', bg='#405898').pack()
+F1= Frame(root,borderwidth=2, relief='sunken', bg='#405898', bd='10')
 F1.pack(side="left", expand=True, fill="both")
-F2= Frame(root,borderwidth=2, relief="sunken", bg='#405898', bd='15')
+F2= Frame(root,borderwidth=2, relief="sunken", bg='#405898', bd='10')
 F2.pack(side="right", expand=True, fill="both")
 
-Label(F1,text="Enter your Name", bg='white', bd='3', font=('calibri bold', 15), fg='Black').grid(row=0,column=0)
+# Label(F1,text="Enter your Name", bg='white', bd='3', font=('calibri bold', 15), fg='Black').grid(row=0,column=0)
+Label(F1,text="Enter your Name", bg='white', bd='3', font=('calibri bold', 15), fg='Black').grid(row=0, sticky=W,padx=10)
+
 E1= Entry(F1,bd=2)
-E1.grid(row=0,column=1,padx=13,pady=10)
+E1.grid(row=0,column=1,padx=5,pady=12)
 
-Label(F1,text="Enter your Age", bg='white', bd='3', font=('calibri bold', 15), fg='Black').grid(row=1,column=0)
+
+
+# Label(F1,text="Enter your Age", bg='white', bd='3', font=('calibri bold', 15), fg='Black').grid(row=1,column=0)
+Label(F1,text="Enter your Age", bg='white', bd='3', font=('calibri bold', 15), fg='Black').grid(row=1,sticky=W, padx=10)
+
 E2= Entry(F1,bd=2)
-E2.grid(row=1,column=1,padx=13,pady=10)
+E2.grid(row=1,column=1,padx=13,pady=12)
 
-Label(F1,text="Enter your Country", bg=('white'), bd='3', font=('calibri bold', 15), fg='Black').grid(row=2,column=0)
+# Label(F1,text="Enter your Country", bg=('white'), bd='3', font=('calibri bold', 15), fg='Black').grid(row=2,column=0)
+Label(F1,text="Enter your Country", bg=('white'), bd='3', font=('calibri bold', 15), fg='Black').grid(row=2,sticky=W, padx=10)
+
 E3= Entry(F1,bd=2)
-E3.grid(row=2,column=1,padx=13,pady=10)
+E3.grid(row=2,column=1,padx=13,pady=12)
 
-Label(F1,text="Enter your Department", bg='white', bd='3', font=('calibri bold', 15), fg='Black', anchor='center').grid(row=3,column=0)
+# Label(F1,text="Enter your Department", bg='white', bd='3', font=('calibri bold', 15), fg='Black', anchor='center').grid(row=3,column=0)
+Label(F1,text="Enter your Department", bg='white', bd='3', font=('calibri bold', 15), fg='Black', anchor='center').grid(row=3,sticky=W, padx=10)
+
 E4= Entry(F1,bd=2)
-E4.grid(row=3,column=1,padx=13,pady=10)
+E4.grid(row=3,column=1,padx=13,pady=12)
 
-Label(F1,text="Enter your Hobbies", bg='white', bd='3', font=('calibri bold', 15), fg='Black').grid(row=4,column=0)
+# Label(F1,text="Enter your Hobbies", bg='white', bd='3', font=('calibri bold', 15), fg='Black').grid(row=4,column=0)
+Label(F1,text="Enter your Hobbies", bg='white', bd='3', font=('calibri bold', 15), fg='Black').grid(row=4,sticky=W, padx=10)
+
 E5= Entry(F1,bd=2)
-E5.grid(row=4,column=1,padx=13,pady=10)
+E5.grid(row=4,column=1,padx=13,pady=12)
 
-Label(F1, text="Enter your friend name's", bg='white', bd='3', font=('calibri bold', 15), fg='Black').grid(row=40, column=0)
+# Label(F1, text="Enter your friend name's", bg='white', bd='3', font=('calibri bold', 15), fg='Black').grid(row=40, column=0)
+Label(F1, text="Enter your friend name's", bg='white', bd='3', font=('calibri bold', 15), fg='Black').grid(row=40, sticky=W, padx=10)
+
 E6=Entry(F1,bd=5)
-E6.grid(row=40,column=1,padx=13,pady=10)
+E6.grid(row=40,column=1,padx=13,pady=12)
 
-View_Friends=Button(F1, text='View My Friendlist', command="c", padx=13, pady=10, activebackground='light blue', activeforeground='red', bg='green', fg='white', font=('calibri bold', 15), bd=5)
+View_Friends=Button(F1, text='View My Friendlist', command="c", padx=13, pady=10, activebackground='light blue', activeforeground='red', bg='green', fg='white', font=('calibri bold', 15), bd=2)
 View_Friends.grid(row=60,column=0,sticky=NSEW,padx=13,pady=10)
 View_Friends.bind('<Button-1>', button_get_friends_list)
 
-clearButton = Button(F1,text="Clear Entry Data", command=clear_text, padx=13, pady=10,  activebackground='light blue', activeforeground='red', bg='green', fg='white', font=('calibri bold', 15), bd=5)
+clearButton = Button(F1,text="Clear Entry Data", command=clear_text, padx=13, pady=10,  activebackground='light blue', activeforeground='red', bg='green', fg='white', font=('calibri bold', 15), bd=2)
 clearButton.grid(row=100,column=1,sticky=NSEW,padx=13,pady=10)
 
-Clear=Button(F1, text='Clear', command=ClearInfo, padx=13, pady=10,  activebackground='light blue', activeforeground='red', bg='green', fg='white', font=('calibri bold', 15), bd=5, height=1, width=1)
+Clear=Button(F1, text='Clear', command=ClearInfo, padx=13, pady=10,  activebackground='light blue', activeforeground='red', bg='green', fg='white', font=('calibri bold', 15), bd=2, height=1, width=1)
 Clear.grid(row=100,column=0,sticky=NSEW,padx=13,pady=10)
 
-Save_Profile=Button(F1, text='Save Profile', command="c", padx=13, pady=10,  activebackground='light blue', activeforeground='red', bg='green', fg='white', font=('calibri bold', 15), bd=5)
+Save_Profile=Button(F1, text='Save Profile', command="c", padx=13, pady=10,  activebackground='light blue', activeforeground='red', bg='green', fg='white', font=('calibri bold', 15), bd=2)
 Save_Profile.grid(row=60,column=1,sticky=NSEW,padx=13,pady=10)
 Save_Profile.bind('<Button-1>', save_user_profile)
 
-View_Profile=Button(F1, text='View Profile', command="c", padx=13, pady=10,  activebackground='light blue', activeforeground='red', bg='green', fg='white', font=('calibri bold', 15), bd=5)
+View_Profile=Button(F1, text='View Profile', command="c", padx=13, pady=10,  activebackground='light blue', activeforeground='red', bg='green', fg='white', font=('calibri bold', 15), bd=2)
 View_Profile.grid(row=60,column=2,sticky=NSEW,padx=13,pady=10)
 View_Profile.bind('<Button-1>', button_get_user_profile)
 
-View_recommended_friends=Button(F1, text='Recommended Friends', command='c', padx=13, pady=10,  activebackground='light blue', activeforeground='red', bg='green', fg='white', font=('calibri bold', 15), bd=5)
+View_recommended_friends=Button(F1, text='Recommended Friends', command='c', padx=13, pady=10,  activebackground='light blue', activeforeground='red', bg='green', fg='white', font=('calibri bold', 15), bd=2)
 View_recommended_friends.grid(row=80,column=0,sticky=NSEW,padx=13,pady=10)
 View_recommended_friends.bind('<Button-1>', button_for_recommended_friends)
 
-Add_friend=Button(F1, text='Add Friend', command='c', padx=13, pady=10,  activebackground='light blue', activeforeground='red', bg='green', fg='white', font=('calibri bold', 15), bd=5)
-Add_friend.grid(row=40,column=2,sticky=NSEW,padx=13,pady=10)
+Add_friend=Button(F1, text='Add Friend', command='c', padx=13, pady=10,  activebackground='light blue', activeforeground='red', bg='green', fg='white', font=('calibri bold', 15), bd=2)
+Add_friend.grid(row=40,column=2,sticky=NSEW,padx=10,pady=10)
 Add_friend.bind('<Button-1>', button_addfirend)
 
-Unfriend=Button(F1, text='Unfriend', command='c', padx=13, pady=10,  activebackground='light blue', activeforeground='red', bg='green', fg='white', font=('calibri bold', 15), bd=5)
-Unfriend.grid(row=100,column=2,sticky=NSEW,padx=13,pady=10)
+Unfriend=Button(F1, text='Unfriend', command='c', padx=13, pady=10,  activebackground='light blue', activeforeground='red', bg='#8B0000', fg='white', font=('calibri bold', 15), bd=2, width=10)
+# Unfriend.grid(row=100,column=2,sticky=NSEW,padx=13,pady=10)
+Unfriend.grid(row=40,column=3,sticky=NSEW,padx=10,pady=10,)
+
 Unfriend.bind('<Button-1>', button_unfriend)
 
-View_Mutual_Friends=Button(F1, text='Mutual Friends', command='c', padx=13, pady=10,  activebackground='light blue', activeforeground='red', bg='green', fg='white', font=('calibri bold', 15), bd=5)
+View_Mutual_Friends=Button(F1, text='Mutual Friends', command='c', padx=13, pady=10,  activebackground='light blue', activeforeground='red', bg='green', fg='white', font=('calibri bold', 15), bd=2)
 View_Mutual_Friends.grid(row=80,column=1,sticky=NSEW,padx=13,pady=10)
 View_Mutual_Friends.bind('<Button-1>', button_get_mutual_friends)
 
-View_Users_Connection=Button(F1, text="User's Connection", command='c', padx=13, pady=10,  activebackground='light blue', activeforeground='red', bg='green', fg='white', font=('calibri bold', 15), bd=5)
+View_Users_Connection=Button(F1, text="User's Connection", command='c', padx=13, pady=10,  activebackground='light blue', activeforeground='red', bg='green', fg='white', font=('calibri bold', 15), bd=2)
 View_Users_Connection.grid(row=80,column=2,sticky=NSEW,padx=13,pady=10)
 View_Users_Connection.bind('<Button-1>', button_get_users_connection)
 # root.tk.call('tk', 'scaling', 1.0)
