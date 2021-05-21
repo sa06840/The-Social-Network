@@ -63,6 +63,13 @@ def user_not_in_socialnetwork(name):
     label = Label(F2, text = 'Sorry, the user that you are looking for is not in the social network.')
     label.pack()
 
+def iserror(func, social_network, user, target_user):
+    try:
+        func(social_network, user, target_user)
+        return False
+    except Exception:
+        return True
+
 
 #Constructing Social Network
 
@@ -303,7 +310,7 @@ def save_user_profile(clicked):
     user = E1.get()
     user = case_sensitivity(user)
     if user == '':
-        label = Label(F2, text = 'Please enter a your name.')
+        label = Label(F2, text = 'Please enter your name.')
         label.pack()
         return
     age = E2.get()
@@ -504,6 +511,10 @@ def button_get_users_connection(clicked):
     target_user = case_sensitivity(target_user)
     if target_user not in social_network or user not in social_network:
         user_not_in_socialnetwork(target_user)
+        return
+    if iserror(get_users_connection, social_network, user, target_user):
+        label = Label(F2, text = 'There is no connection between ' + user + ' and ' + target_user + '.')
+        label.pack()
         return
     res = get_users_connection(social_network, user, target_user)
     my_listbox = Listbox(F2, width=50, height=20)
