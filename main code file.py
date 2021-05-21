@@ -59,23 +59,16 @@ def case_sensitivity(name):
     lowered_name = name.lower()
     fixed_name = lowered_name.title()
     return fixed_name
-<<<<<<< Updated upstream
-=======
 
 def user_not_in_socialnetwork(name):
     label = Label(F2, text = 'Sorry, the user that you are looking for is not in the social network.')
     label.pack()
 
->>>>>>> Stashed changes
 
 #Constructing Social Network
 
 import csv
-<<<<<<< Updated upstream
-from os import remove
-=======
 import random
->>>>>>> Stashed changes
 
 def readcsv(filename):
     matrix = []
@@ -135,17 +128,11 @@ def add_friend(social_network, profiles, user, friend):
 
 def button_addfirend(clicked):
     friend=E6.get()
-<<<<<<< Updated upstream
-    friend=case_sensitivity(friend)
-    user=E1.get()
-    user=case_sensitivity(user)
-=======
     friend = case_sensitivity(friend)
     if friend not in social_network:
         user_not_in_socialnetwork(friend)
     user=E1.get()
     user = case_sensitivity(user)
->>>>>>> Stashed changes
     add_friend(social_network, profiles, user, friend)
 
 
@@ -166,16 +153,6 @@ def unfriend(social_network,user,remove_friend):
 #Button for Removing a Friend
 
 def button_unfriend(clicked):
-<<<<<<< Updated upstream
-    remove_friend=E6.get()
-    remove_friend=case_sensitivity(remove_friend)
-    user =E1.get()
-    user=case_sensitivity(user)
-    unfriend(social_network,user,remove_friend)
-    # remove_friend = E6.get()
-    # user = E1.get()
-    # unfriend(social_network, user, remove_friend)
-=======
     remove_friend = E6.get()
     remove_friend = case_sensitivity(remove_friend)
     if remove_friend not in social_network:
@@ -183,7 +160,6 @@ def button_unfriend(clicked):
     user = E1.get()
     user = case_sensitivity(user)
     unfriend(social_network, user, remove_friend)
->>>>>>> Stashed changes
 
 
 
@@ -204,13 +180,9 @@ def get_friends_list(social_network, user):
 
 def button_get_friends_list(clicked):
     user = E1.get()
-<<<<<<< Updated upstream
-    user=case_sensitivity(user)
-=======
     user = case_sensitivity(user)
     if user not in social_network:
         user_not_in_socialnetwork(user)
->>>>>>> Stashed changes
     #filename = 'friendships.csv'
     #matrix_of_friendships = readcsv(filename)
     #social_network = constructing_social_network(matrix_of_friendships)
@@ -248,17 +220,11 @@ print('Mutual Friends of ' + str(user) + ' and ' + str(user2) + ': ' + str(get_m
 
 def button_get_mutual_friends(clicked):
     user1 = E1.get()
-<<<<<<< Updated upstream
-    user1=case_sensitivity(user1)
-    user2 = E6.get()
-    user2=case_sensitivity(user2)
-=======
     user1 = case_sensitivity(user1)
     user2 = E6.get()
     user2 = case_sensitivity(user2)
     if user2 not in social_network:
         user_not_in_socialnetwork(user2)
->>>>>>> Stashed changes
     res = get_mutual_friends(social_network, user1, user2)
     my_listbox = Listbox(F2, width=50, height=20)
     my_listbox.pack(pady = 15)
@@ -321,17 +287,6 @@ print(profiles, '\n')
 
 def save_user_profile(clicked):
     user = E1.get()
-<<<<<<< Updated upstream
-    user=case_sensitivity(user)
-    age = E2.get()
-    age=case_sensitivity(age)
-    country = E3.get()
-    country=case_sensitivity(country)
-    department = E4.get()
-    department=case_sensitivity(department)
-    hobbies = E5.get()
-    hobbies=case_sensitivity(hobbies)
-=======
     user = case_sensitivity(user)
     age = E2.get()
     if age.isdigit() == False and age != '':
@@ -343,7 +298,6 @@ def save_user_profile(clicked):
     department = case_sensitivity(department)
     hobbies = E5.get()
     hobbies = case_sensitivity(hobbies)
->>>>>>> Stashed changes
     profiles = fixing_user_profile(profiles_temp, user, age, country, department, hobbies)
 
 
@@ -363,18 +317,6 @@ print('\n')
 
 def button_get_user_profile(clicked):
     user = E1.get()
-<<<<<<< Updated upstream
-    user=case_sensitivity(user)
-    res = profiles[user]
-    my_listbox = Listbox(F2, width=50)
-    my_listbox.pack(pady = 15)
-    title = 'Profile of ' + user + ': '
-    my_listbox.insert(0, title)
-    my_listbox.insert(1, '')
-    for item in res:
-        ans = item[0] + ' = ' + item[1]
-        my_listbox.insert('end', ans)
-=======
     user = case_sensitivity(user)
     if user not in social_network:
         user_not_in_socialnetwork(user)
@@ -404,7 +346,6 @@ def button_get_user_profile(clicked):
         for item in res:
             ans = item[0] + ' = ' + item[1]
             my_listbox.insert('end', ans)
->>>>>>> Stashed changes
     
 
 
@@ -461,13 +402,9 @@ print('\n')
 
 def button_for_recommended_friends(clicked):
     user=E1.get()
-<<<<<<< Updated upstream
-    user=case_sensitivity(user)
-=======
     user = case_sensitivity(user)
     if user not in social_network:
         user_not_in_socialnetwork(user)
->>>>>>> Stashed changes
     #filename = 'friendships.csv'
     #matrix_of_friendships = readcsv(filename)
     #social_network = constructing_social_network(matrix_of_friendships)
@@ -542,17 +479,11 @@ print('Path from ' + user + ' to ' + target_user + ': ' + str(get_users_connecti
 
 def button_get_users_connection(clicked):
     user = E1.get()
-<<<<<<< Updated upstream
-    user=case_sensitivity(user)
-    target_user = E6.get()
-    target_user=case_sensitivity(target_user)
-=======
     user = case_sensitivity(user)
     target_user = E6.get()
     target_user = case_sensitivity(target_user)
     if target_user not in social_network:
         user_not_in_socialnetwork(target_user)
->>>>>>> Stashed changes
     res = get_users_connection(social_network, user, target_user)
     my_listbox = Listbox(F2, width=50)
     my_listbox.pack(pady = 15)
