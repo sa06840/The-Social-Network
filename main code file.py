@@ -55,11 +55,15 @@ def get_cost(social_network, profiles, user):
         cost[i] = new_cost
     return cost
 
-
+def case_sensitivity(name):
+    lowered_name = name.lower()
+    fixed_name = lowered_name.title()
+    return fixed_name
 
 #Constructing Social Network
 
 import csv
+from os import remove
 
 def readcsv(filename):
     matrix = []
@@ -115,14 +119,16 @@ def add_friend(social_network, profiles, user, friend):
 
 def button_addfirend(clicked):
     friend=E6.get()
+    friend=case_sensitivity(friend)
     user=E1.get()
+    user=case_sensitivity(user)
     add_friend(social_network, profiles, user, friend)
 
 
 
 #Remove a Friend
 
-def unfriend(social_network, user, remove_friend):
+def unfriend(social_network,user,remove_friend):
     for i in social_network[user]:
         if remove_friend == i[0]:
             social_network[user].remove(i)
@@ -136,9 +142,14 @@ def unfriend(social_network, user, remove_friend):
 #Button for Removing a Friend
 
 def button_unfriend(clicked):
-    remove_friend = E6.get()
-    user = E1.get()
-    unfriend(social_network, user, remove_friend)
+    remove_friend=E6.get()
+    remove_friend=case_sensitivity(remove_friend)
+    user =E1.get()
+    user=case_sensitivity(user)
+    unfriend(social_network,user,remove_friend)
+    # remove_friend = E6.get()
+    # user = E1.get()
+    # unfriend(social_network, user, remove_friend)
 
 
 
@@ -160,6 +171,7 @@ def get_friends_list(social_network, user):
 
 def button_get_friends_list(clicked):
     user = E1.get()
+    user=case_sensitivity(user)
     #filename = 'friendships.csv'
     #matrix_of_friendships = readcsv(filename)
     #social_network = constructing_social_network(matrix_of_friendships)
@@ -193,7 +205,9 @@ print('Mutual Friends of ' + str(user) + ' and ' + str(user2) + ': ' + str(get_m
 
 def button_get_mutual_friends(clicked):
     user1 = E1.get()
+    user1=case_sensitivity(user1)
     user2 = E6.get()
+    user2=case_sensitivity(user2)
     res = get_mutual_friends(social_network, user1, user2)
     my_listbox = Listbox(F2, width=50, height=20)
     my_listbox.pack(pady = 15)
@@ -252,10 +266,15 @@ print(profiles, '\n')
 
 def save_user_profile(clicked):
     user = E1.get()
+    user=case_sensitivity(user)
     age = E2.get()
+    age=case_sensitivity(age)
     country = E3.get()
+    country=case_sensitivity(country)
     department = E4.get()
+    department=case_sensitivity(department)
     hobbies = E5.get()
+    hobbies=case_sensitivity(hobbies)
     profiles = fixing_user_profile(profiles_temp, user, age, country, department, hobbies)
     #res = profiles[user]
     #my_listbox = Listbox(F2, width=50)
@@ -283,6 +302,7 @@ print('\n')
 
 def button_get_user_profile(clicked):
     user = E1.get()
+    user=case_sensitivity(user)
     res = profiles[user]
     my_listbox = Listbox(F2, width=50)
     my_listbox.pack(pady = 15)
@@ -348,6 +368,7 @@ print('\n')
 
 def button_for_recommended_friends(clicked):
     user=E1.get()
+    user=case_sensitivity(user)
     #filename = 'friendships.csv'
     #matrix_of_friendships = readcsv(filename)
     #social_network = constructing_social_network(matrix_of_friendships)
@@ -422,7 +443,9 @@ print('Path from ' + user + ' to ' + target_user + ': ' + str(get_users_connecti
 
 def button_get_users_connection(clicked):
     user = E1.get()
+    user=case_sensitivity(user)
     target_user = E6.get()
+    target_user=case_sensitivity(target_user)
     res = get_users_connection(social_network, user, target_user)
     my_listbox = Listbox(F2, width=50)
     my_listbox.pack(pady = 15)
