@@ -129,10 +129,16 @@ def add_friend(social_network, profiles, user, friend):
 def button_addfirend(clicked):
     friend=E6.get()
     friend = case_sensitivity(friend)
-    if friend not in social_network:
-        user_not_in_socialnetwork(friend)
     user=E1.get()
     user = case_sensitivity(user)
+    if friend not in social_network or user not in social_network:
+        user_not_in_socialnetwork(friend)
+        return
+    elif friend in get_friends_list(social_network, user):
+        res = friend + ' is already in your friendlist.'
+        label = Label(F2, text = res)
+        label.pack()
+        return
     add_friend(social_network, profiles, user, friend)
 
 
@@ -155,10 +161,16 @@ def unfriend(social_network,user,remove_friend):
 def button_unfriend(clicked):
     remove_friend = E6.get()
     remove_friend = case_sensitivity(remove_friend)
-    if remove_friend not in social_network:
-        user_not_in_socialnetwork(remove_friend)
     user = E1.get()
     user = case_sensitivity(user)
+    if remove_friend not in social_network or user not in social_network:
+        user_not_in_socialnetwork(remove_friend)
+        return
+    elif remove_friend not in get_friends_list(social_network, user):
+        res = remove_friend + ' is not in your friendlist.'
+        label = Label(F2, text = res)
+        label.pack()
+        return
     unfriend(social_network, user, remove_friend)
 
 
@@ -183,6 +195,7 @@ def button_get_friends_list(clicked):
     user = case_sensitivity(user)
     if user not in social_network:
         user_not_in_socialnetwork(user)
+        return
     #filename = 'friendships.csv'
     #matrix_of_friendships = readcsv(filename)
     #social_network = constructing_social_network(matrix_of_friendships)
@@ -223,9 +236,15 @@ def button_get_mutual_friends(clicked):
     user1 = case_sensitivity(user1)
     user2 = E6.get()
     user2 = case_sensitivity(user2)
-    if user2 not in social_network:
+    if user2 not in social_network or user1 not in social_network:
         user_not_in_socialnetwork(user2)
+        return
     res = get_mutual_friends(social_network, user1, user2)
+    if res == []:
+        res = 'You and ' + user2 + ' do not have any mutual friends.'
+        label = Label(F2, text = res)
+        label.pack()
+        return
     my_listbox = Listbox(F2, width=50, height=20)
     my_listbox.pack(pady = 15)
     title = 'Mutual Friends of  ' + user1 + ' and ' + user2 + ': '
@@ -326,6 +345,7 @@ def button_get_user_profile(clicked):
     if friend:
         if friend not in social_network:
             user_not_in_socialnetwork(friend)
+            return
         else:
             res = profiles[friend]
             title = 'Profile of ' + friend + ': '
@@ -405,10 +425,7 @@ def button_for_recommended_friends(clicked):
     user = case_sensitivity(user)
     if user not in social_network:
         user_not_in_socialnetwork(user)
-    #filename = 'friendships.csv'
-    #matrix_of_friendships = readcsv(filename)
-    #social_network = constructing_social_network(matrix_of_friendships)
-    #profiles = fixing_user_profile(profiles_temp, user, age, country, department, hobbies)
+        return
     res=get_recommended_friends(social_network, profiles, user)
     my_listbox = Listbox(F2, width=50)
     my_listbox.pack(pady = 15)
@@ -482,8 +499,9 @@ def button_get_users_connection(clicked):
     user = case_sensitivity(user)
     target_user = E6.get()
     target_user = case_sensitivity(target_user)
-    if target_user not in social_network:
+    if target_user not in social_network or user not in social_network:
         user_not_in_socialnetwork(target_user)
+        return
     res = get_users_connection(social_network, user, target_user)
     my_listbox = Listbox(F2, width=50)
     my_listbox.pack(pady = 15)
