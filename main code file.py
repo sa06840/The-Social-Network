@@ -1,7 +1,6 @@
 
 #Mini Facebook
 
-
 #Helper Functions
 
 def get_profile_in_list(profiles, user):
@@ -96,7 +95,6 @@ print(constructing_social_network(matrix_of_friendships), '\n')
 social_network = constructing_social_network(matrix_of_friendships)
 
 
-
 #User
 
 user = 'Shah Jamal Alam'
@@ -142,7 +140,6 @@ def button_addfirend(clicked):
     add_friend(social_network, profiles, user, friend)
 
 
-
 #Remove a Friend
 
 def unfriend(social_network,user,remove_friend):
@@ -172,7 +169,6 @@ def button_unfriend(clicked):
         label.pack()
         return
     unfriend(social_network, user, remove_friend)
-
 
 
 #Getting Friends List
@@ -257,7 +253,6 @@ def button_get_mutual_friends(clicked):
     my_listbox.insert('end', 'Total Mutual Friends = ' + str(i+1))
 
 
-
 #Constructing User Profiles
 
 def readcsv(filename):
@@ -320,7 +315,6 @@ def save_user_profile(clicked):
     profiles = fixing_user_profile(profiles_temp, user, age, country, department, hobbies)
 
 
-
 #Getting Profile
 
 def get_user_profile(profiles, user):
@@ -367,7 +361,6 @@ def button_get_user_profile(clicked):
             ans = item[0] + ' = ' + item[1]
             my_listbox.insert('end', ans)
     
-
 
 #Recommending Friends
 
@@ -435,7 +428,6 @@ def button_for_recommended_friends(clicked):
     for i in range(len(res)):
         ans = str(i+1) + '. ' + res[i][0]
         my_listbox.insert('end', ans)
-
 
 
 #User's Connection
@@ -515,23 +507,15 @@ def button_get_users_connection(clicked):
     my_listbox.insert('end', last)
 
 
-
-
 from tkinter import *
 import tkinter.messagebox
 from tkinter import ttk
 import pickle
 
-# from PIL import ImageTk,Image  
-
-
 #GUI
-
 root = Tk()
 root.title("MINI-FACEBOOK")
-root.geometry('1300x1000')
-# root.configure(bg='')
-
+root.geometry('1920x1080')
 
 #Button for Clearing Window
 
@@ -593,7 +577,6 @@ Save_Profile=Button(F1, text='Save Profile', command="c", padx=13, pady=10,  act
 Save_Profile.grid(row=60,column=1,sticky=NSEW,padx=13,pady=10)
 Save_Profile.bind('<Button-1>', save_user_profile)
 
-#<><>
 View_Profile=Button(F1, text='View Profile', command="c", padx=13, pady=10,  activebackground='light blue', activeforeground='red', bg='#778899', fg='white', font=('calibri bold', 15), bd=2)
 View_Profile.grid(row=80,column=2,sticky=NSEW,padx=13,pady=10)
 View_Profile.bind('<Button-1>', button_get_user_profile)
@@ -607,7 +590,6 @@ Add_friend.grid(row=40,column=2,sticky=NSEW,padx=10,pady=10)
 Add_friend.bind('<Button-1>', button_addfirend)
 
 Unfriend=Button(F1, text='Unfriend', command='c', padx=13, pady=10,  activebackground='light blue', activeforeground='red', bg='#8B0000', fg='white', font=('calibri bold', 15), bd=2, width=10)
-# Unfriend.grid(row=100,column=2,sticky=NSEW,padx=13,pady=10)
 Unfriend.grid(row=60,column=2,sticky=NSEW,padx=10,pady=10,)
 
 Unfriend.bind('<Button-1>', button_unfriend)
@@ -616,7 +598,6 @@ View_Mutual_Friends=Button(F1, text='Mutual Friends', command='c', padx=13, pady
 View_Mutual_Friends.grid(row=80,column=1,sticky=NSEW,padx=13,pady=10)
 View_Mutual_Friends.bind('<Button-1>', button_get_mutual_friends)
 
-#<><>
 View_Users_Connection=Button(F1, text="User's Connection", command='c', padx=13, pady=10,  activebackground='light blue', activeforeground='red', bg='#778899', fg='white', font=('calibri bold', 15), bd=2)
 View_Users_Connection.grid(row=100,column=2,sticky=NSEW,padx=13,pady=10)
 View_Users_Connection.bind('<Button-1>', button_get_users_connection)
