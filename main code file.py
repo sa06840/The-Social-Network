@@ -476,41 +476,27 @@ F1.pack(side="left", expand=True, fill="both")
 F2= Frame(root,borderwidth=2, relief="sunken", bg='#405898', bd='10')
 F2.pack(side="right", expand=True, fill="both")
 
-# Label(F1,text="Enter your Name", bg='white', bd='3', font=('calibri bold', 15), fg='Black').grid(row=0,column=0)
 Label(F1,text="Enter your Name", bg='white', bd='3', font=('calibri bold', 15), fg='Black').grid(row=0, sticky=W,padx=10)
-
 E1= Entry(F1,bd=2)
 E1.grid(row=0,column=1,padx=5,pady=12)
 
-
-
-# Label(F1,text="Enter your Age", bg='white', bd='3', font=('calibri bold', 15), fg='Black').grid(row=1,column=0)
 Label(F1,text="Enter your Age", bg='white', bd='3', font=('calibri bold', 15), fg='Black').grid(row=1,sticky=W, padx=10)
-
 E2= Entry(F1,bd=2)
 E2.grid(row=1,column=1,padx=13,pady=12)
 
-# Label(F1,text="Enter your Country", bg=('white'), bd='3', font=('calibri bold', 15), fg='Black').grid(row=2,column=0)
 Label(F1,text="Enter your Country", bg=('white'), bd='3', font=('calibri bold', 15), fg='Black').grid(row=2,sticky=W, padx=10)
-
 E3= Entry(F1,bd=2)
 E3.grid(row=2,column=1,padx=13,pady=12)
 
-# Label(F1,text="Enter your Department", bg='white', bd='3', font=('calibri bold', 15), fg='Black', anchor='center').grid(row=3,column=0)
 Label(F1,text="Enter your Department", bg='white', bd='3', font=('calibri bold', 15), fg='Black', anchor='center').grid(row=3,sticky=W, padx=10)
-
 E4= Entry(F1,bd=2)
 E4.grid(row=3,column=1,padx=13,pady=12)
 
-# Label(F1,text="Enter your Hobbies", bg='white', bd='3', font=('calibri bold', 15), fg='Black').grid(row=4,column=0)
 Label(F1,text="Enter your Hobbies", bg='white', bd='3', font=('calibri bold', 15), fg='Black').grid(row=4,sticky=W, padx=10)
-
 E5= Entry(F1,bd=2)
 E5.grid(row=4,column=1,padx=13,pady=12)
 
-# Label(F1, text="Enter your friend name's", bg='white', bd='3', font=('calibri bold', 15), fg='Black').grid(row=40, column=0)
 Label(F1, text="Enter your friend name's", bg='white', bd='3', font=('calibri bold', 15), fg='Black').grid(row=40, sticky=W, padx=10)
-
 E6=Entry(F1,bd=5)
 E6.grid(row=40,column=1,padx=13,pady=12)
 
