@@ -3,34 +3,34 @@
 
 #Helper Functions
 
-def get_profile_in_list(profiles, user):
-    lst = []
-    for i in profiles[user]:
+def get_profile_in_list(profiles, user):  #---> The get_profile_in_list function takes the profiles dictionary and a user's name as inputs.
+    lst = []                              #     It then iterates through the user's profile and appends the user's information in a list while
+    for i in profiles[user]:              #     ignoring the category of the information. It then outputs this list.
         elem = i[1].split(',')
         for j in elem:
             print(j.lstrip())
             lst.append(j.strip())
     return lst
 
-def is_empty(lst):
+def is_empty(lst):    #--> The is_empty function takes a list as an input and returns true if it is empty. If it is not empty, it returns False.
     if len(lst) == 0:
         return True
     else:
         return False
 
-def get_neighbours(G, node):
-    neighbours = []
-    for i in G[node]:
+def get_neighbours(G, node):   #--> The get_neighbours functions take a graph(G) and a node as inputs. Since the graph is in the form of an
+    neighbours = []            #    adjacency list, the function iterates through the node(user)'s adjacent nodes and appends them in a list.
+    for i in G[node]:          #    This list which contains the adjacent nodes of the input node is then returned.
         neighbours.append(i)
     return neighbours
 
-def get_cost(social_network, profiles, user):
-    cost = {}
-    unknown = []
-    for node in social_network:
-        cost[node] = 100000
-        unknown.append(node)
-    cost[user] = 0
+def get_cost(social_network, user):            #--> The get_cost function takes the social_network and user's name as inputs.
+    cost = {}                                  #    It then runs Dijkstra's algorithm on the social_network with the user as the starting node
+    unknown = []                               #    and calculates the mimimum cost of going from the user to every other person in the social_network.
+    for node in social_network:                #    The cost of every person is stored in the cost dictionary in which the person's name is the key and their
+        cost[node] = 100000                    #    cost from the user is the value. This cost dictionary is the returned.
+        unknown.append(node)                   
+    cost[user] = 0                             
     while not(is_empty(unknown)):
         lowest = None
         for node in unknown:
@@ -44,29 +44,20 @@ def get_cost(social_network, profiles, user):
             c2 = cost[neighbour[0]]
             if c1 < c2:
                 cost[neighbour[0]] = c1
-    user_profile = get_profile_in_list(profiles, user)
-    for i in cost:
-        counter = 0
-        i_profile = get_profile_in_list(profiles, i)
-        for j in user_profile:
-            if j in i_profile:
-                counter = counter + 1
-        new_cost = cost[i] - counter
-        cost[i] = new_cost
     return cost
 
-def case_sensitivity(name):
+def case_sensitivity(name):          #--> The case_sensitivity makes sure that the code works despite the case used by the user in the input.
     lowered_name = name.lower()
     fixed_name = lowered_name.title()
     fixed_name = fixed_name.strip()
     return fixed_name
 
-def user_not_in_socialnetwork(name):
+def user_not_in_socialnetwork(name):   #--> The user_not_in_socialnetwork function is called whenever the input name is not in the social_network.
     label = Label(F2, text = 'Sorry, the user that you are looking for is not in the social network.')
     label.pack()
 
-def iserror(func, social_network, user, target_user):
-    try:
+def iserror(func, social_network, user, target_user):   #--> The is_error function is called in order to check if the get_user_connection function
+    try:                                                #    returns an error or not.
         func(social_network, user, target_user)
         return False
     except Exception:
@@ -78,17 +69,17 @@ def iserror(func, social_network, user, target_user):
 import csv
 import random
 
-def readcsv(filename):
-    matrix = []
+def readcsv(filename):                      #--> The readcsv function takes the friendships.csv file as an input and returns an adjacency matrix
+    matrix = []                             #    which displays the connections between the users.
     with open(filename, 'r') as file:
         reader = csv.reader(file)
         for row in reader:
             matrix.append(row)
     return matrix
 
-def constructing_social_network(matrix):
-    social_network = {}
-    for i in matrix[0]:
+def constructing_social_network(matrix):   #--> The constructing_social_network function takes the adjacency matrix of the social_network
+    social_network = {}                    #    as an input and converts it into an adjacency list. It then returns the social_network in the
+    for i in matrix[0]:                    #    form of an adjacency list.
         if i != '':
             social_network[i] = []
     for i in range(1, len(matrix)):
@@ -99,14 +90,12 @@ def constructing_social_network(matrix):
 
 filename = 'friendships.csv'
 matrix_of_friendships = readcsv(filename)
-print('Social Network: ')
-print(constructing_social_network(matrix_of_friendships), '\n')
 social_network = constructing_social_network(matrix_of_friendships)
 
 
-#User
+#Test Case
 
-user = 'Shah Jamal Alam'
+user = 'Shah Jamal Alam'                      #--> This is a test case which acts as an input for the functions initially. You are free to alter it but do not delete it.
 age = '35'
 country = 'New Zealand'
 department = 'Data Structures and Algorithms'
@@ -115,21 +104,17 @@ hobbies = 'Cooking, Snooker'
 
 #Add a Friend
 
-def add_friend(social_network, profiles, user, friend):
-    if get_friends_list(social_network, user) == []:
-        weight = random.randint(1,10)
-        social_network[user].append((friend, weight))
+def add_friend(social_network, profiles, user, friend):       #--> The add_friend function takes the social_network, profiles dictionary, user's name and
+    if get_friends_list(social_network, user) == []:          #    friend's name as inputs. It then adds the friend in the user's friend list and adds the user
+        weight = random.randint(1,10)                         #    in the friend's friend list. The friend's cost from the user is also added for further use.
+        social_network[user].append((friend, weight))         #    It then returns the updated social_network.
         return social_network
-    cost_dictionary = get_cost(social_network, profiles, user)
+    cost_dictionary = get_cost(social_network, user)
     cost = cost_dictionary[friend]
     social_network[user].append((friend, cost))
     social_network[friend].append((user, cost))
     return social_network  
 
-
-#friend = 'Sajal Rana'
-#print('Social Network: ')
-#print(add_friend(social_network, profiles, user, friend), '\n')
 
 
 #Button for Adding a Friend
@@ -152,18 +137,15 @@ def button_addfirend(clicked):
 
 #Remove a Friend
 
-def unfriend(social_network,user,remove_friend):
-    for i in social_network[user]:
-        if remove_friend == i[0]:
+def unfriend(social_network,user,remove_friend):      #--> The unfriend function takes the social_network, user's name and friend's name as inputs.
+    for i in social_network[user]:                    #    It then removes the friend from the user's friend list and removes the user from the friend's
+        if remove_friend == i[0]:                     #    friend list. It then returns the updated social_network.
             social_network[user].remove(i)
     for j in social_network[remove_friend]:
         if user == j[0]:
             social_network[remove_friend].remove(j)
     return social_network
 
-#remove_friend = 'Waqar Saleem'
-#print('Social Network: ')
-#print(unfriend(social_network, user, remove_friend))
 
 
 #Button for Removing a Friend
@@ -186,15 +168,13 @@ def button_unfriend(clicked):
 
 #Getting Friends List
 
-def get_friends_list(social_network, user):
-    friends_list= []
-    for i in social_network[user]:
+def get_friends_list(social_network, user):   #--> The get_friends_list function takes the social_network and user's name as inputs.
+    friends_list= []                          #    It then iterates through the people that are connected to the user and appends their name
+    for i in social_network[user]:            #    in a list. This list is then returned. 
         friend = i[0]
         friends_list.append(friend)
     return friends_list 
 
-#social_network = constructing_social_network(matrix_of_friendships)
-#print("Friends of " + str(user) + ': ' + str(get_friends_list(social_network, user)), '\n')
 
 
 #Button For Viewing Friends
@@ -205,9 +185,6 @@ def button_get_friends_list(clicked):
     if user not in social_network:
         user_not_in_socialnetwork(user)
         return
-    #filename = 'friendships.csv'
-    #matrix_of_friendships = readcsv(filename)
-    #social_network = constructing_social_network(matrix_of_friendships)
     res = get_friends_list(social_network, user)
     if res == []:
         label = Label(F2, text = 'You have no friends.')
@@ -227,16 +204,15 @@ def button_get_friends_list(clicked):
 
 #Checking Mutual Friends
 
-def get_mutual_friends(social_network, user1, user2):
-    mutual_friends = []
-    user1_friends = get_friends_list(social_network, user1)
+def get_mutual_friends(social_network, user1, user2):           #--> The get_mutual_friends function takes the social_network, user's name and another person's name
+    mutual_friends = []                                         #    as inputs. It then iterates through both of their friend lists and appends the common ones in a new list.
+    user1_friends = get_friends_list(social_network, user1)     #    This list of mutual friends is then returned.
     for i in social_network[user2]:
         if i[0] in user1_friends:
             mutual_friends.append(i[0])
     return mutual_friends
 
-user2 = 'Waqar Saleem'
-print('Mutual Friends of ' + str(user) + ' and ' + str(user2) + ': ' + str(get_mutual_friends(social_network, user, user2)), '\n')
+
 
 #Button for Getting Mutual Friends
 
@@ -268,16 +244,16 @@ def button_get_mutual_friends(clicked):
 
 #Constructing User Profiles
 
-def readcsv(filename):
-    matrix = []
+def readcsv(filename):                   #--> The readcsv file function takes the profiles.csv file as an input and converts it into an adjacecny
+    matrix = []                          #    matrix which contains the profile of every user. This matrix is then returned.
     with open(filename, 'r') as file:
         reader = csv.reader(file)
         for row in reader:
             matrix.append(row)
     return matrix
 
-def constructing_profiles(matrix):
-    profiles = {}
+def constructing_profiles(matrix):                                      #--> The constructing_profiles function takes the profiles adjacency matrix as an input and converts it into a dictionary
+    profiles = {}                                                       #    which consists of the profiles of every user. This profiles dictionary is then returned.
     for i in range(1, len(matrix[0])):
         for j in range(1, len(matrix)):
             if not(matrix[0][i] in profiles):
@@ -286,10 +262,10 @@ def constructing_profiles(matrix):
                 profiles[matrix[0][i]].append((matrix[j][0], matrix[j][i]))
     return profiles
 
-def fixing_user_profile(profiles, user, age, country, department, hobbies):
-    if user not in profiles:
-        profiles[user] = [('Age', age), ('Country', country), ('Department', department), ('Hobbies', hobbies)]
-        social_network[user] = []
+def fixing_user_profile(profiles, user, age, country, department, hobbies):                                        #--> The fixing_user_profile function takes the profiles dictionary and the user's information as inputs.
+    if user not in profiles:                                                                                       #    It then uses this information to update and save the user's profile. If the user is not in the social_network,
+        profiles[user] = [('Age', age), ('Country', country), ('Department', department), ('Hobbies', hobbies)]    #    it adds the user to the social_network and creates a profile for them using the information provided by the user.
+        social_network[user] = []                                                                                  #    This profile is then added to the profiles dictionary. The updated profiles dictionary is then returned.
     else:
         for i in range(len(profiles[user])):
             if profiles[user][i][0] == 'Age':
@@ -306,8 +282,7 @@ filename = 'profiles.csv'
 matrix_of_profiles = readcsv(filename)
 profiles_temp = constructing_profiles(matrix_of_profiles)
 profiles = fixing_user_profile(profiles_temp, user, age, country, department, hobbies)
-print('Profiles: oqba')
-print(profiles, '\n')
+
 
 
 #Button for saving profile
@@ -340,13 +315,11 @@ def save_user_profile(clicked):
 
 #Getting Profile
 
-def get_user_profile(profiles, user):
-    print('Profile of ' + user + ': ')
-    for i in profiles[user]:
+def get_user_profile(profiles, user):     #--> The get_user_profile function takes the profiles dictionary and user's name as inputs.
+    print('Profile of ' + user + ': ')    #    It then iterates through the user's profile and prints their information. This function is not used in the GUI.
+    for i in profiles[user]:              #    We have kept it if the user wants the output in the terminal.
         print(i[0] + ': ' + i[1])
 
-get_user_profile(profiles, user)
-print('\n')
 
 
 #Button for getting user's profile
@@ -387,14 +360,14 @@ def button_get_user_profile(clicked):
 
 #Recommending Friends
 
-def get_recommended_friends(social_network, profiles, user):
-    cost = {}
-    unknown = []
-    recommended_friends = []
-    for node in social_network:
-        cost[node] = 100000
-        unknown.append(node)
-    cost[user] = 0
+def get_recommended_friends(social_network, profiles, user):     #--> The get_recommended_friends function takes the social_network, profiles dictionary and user's name as an input. It then
+    cost = {}                                                    #    runs Dijkstra's algorithm on the social_network graph with the user as the starting node and finds the minimum cost from
+    unknown = []                                                 #    the user to every other person in the social_network. It then adds this minimum cost to the cost dictionary in which the person's name
+    recommended_friends = []                                     #    is the key and the value is the minimum cost. After this the function calculates the similarities between the user's profile and the profile
+    for node in social_network:                                  #    of every other person in the social_network. It subtracts this similarity from the cost of the respective person and updates the cost
+        cost[node] = 100000                                      #    dictionary accordingly. This function then iterates through this dictionary and appends those people (along with their cost)
+        unknown.append(node)                                     #    who are not in the user's friend list (does not append the user), in the recommended friends list. This recommended friends list is then sorted
+    cost[user] = 0                                               #    on the basis of the cost and returned. The most recommdend person comes first whereas the least recommended person comes last.
     while not(is_empty(unknown)):
         lowest = None
         for node in unknown:
@@ -415,8 +388,8 @@ def get_recommended_friends(social_network, profiles, user):
         for j in user_profile[1:]:
             if j in i_profile[1:]:
                 counter = counter + 1
-        fixed_age_difference = 0
-        if user_profile[0] != '':
+        fixed_age_difference = 0                                              # The four next lines of code ensure that the age difference between the user and every other person in the social network
+        if user_profile[0] != '':                                             #  is also taken into account while recommending friends.
             age_difference = abs(int(user_profile[0]) - int(i_profile[0]))
             fixed_age_difference = age_difference//10
         new_cost = cost[i] - counter + fixed_age_difference
@@ -429,11 +402,6 @@ def get_recommended_friends(social_network, profiles, user):
     recommended_friends = sorted(recommended_friends, key=lambda item: item[1])
     return recommended_friends
 
-
-print(get_friends_list(social_network, 'Shah Jamal Alam'))
-print('Recommended Friends for ' + str(user) + ': ')
-get_recommended_friends(social_network, profiles, user)
-print('\n')
 
 
 # Button for getting recommended friends
@@ -457,11 +425,11 @@ def button_for_recommended_friends(clicked):
 
 #User's Connection
 
-def get_users_connection(social_network, user, target_user):
-    cost = {}
-    unknown = []
-    path = []
-    parent = {}
+def get_users_connection(social_network, user, target_user):    #--> The get_users_connection function takes the social_network, user's name and target user's name as inputs.
+    cost = {}                                                   #    It then runs Dijkstra's algorithm on the social_network graph with the user as the starting node and target_user
+    unknown = []                                                #    as the end node. By calculating the cost of every person from the user, storing them in a dictionary, keeping a record
+    path = []                                                   #    of the parent nodes and back-tracking, this function returns the shortest path from the user to the target_user.
+    parent = {}                                                 #    This tells the user how they are connected to a specific person in the social_network.
     lst_of_lowest = []
     for node in social_network:
         cost[node] = 100000
@@ -506,8 +474,7 @@ def get_users_connection(social_network, user, target_user):
             if i[0] == user:
                 return shortest_path
 
-target_user = 'Rameez Ragheb'
-print('Path from ' + user + ' to ' + target_user + ': ' + str(get_users_connection(social_network, user, target_user)), '\n')
+
 
 #Button for user connection
 
