@@ -123,6 +123,7 @@ def add_friend(social_network, profiles, user, friend):
     cost_dictionary = get_cost(social_network, profiles, user)
     cost = cost_dictionary[friend]
     social_network[user].append((friend, cost))
+    social_network[friend].append((user, cost))
     return social_network  
 
 
@@ -155,6 +156,9 @@ def unfriend(social_network,user,remove_friend):
     for i in social_network[user]:
         if remove_friend == i[0]:
             social_network[user].remove(i)
+    for j in social_network[remove_friend]:
+        if user == j[0]:
+            social_network[remove_friend].remove(j)
     return social_network
 
 #remove_friend = 'Waqar Saleem'
