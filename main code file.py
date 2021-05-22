@@ -119,11 +119,11 @@ def add_friend(social_network, profiles, user, friend):       #--> The add_frien
 
 #Button for Adding a Friend
 
-def button_addfirend(clicked):
-    friend=E6.get()
-    friend = case_sensitivity(friend)
-    user=E1.get()
-    user = case_sensitivity(user)
+def button_addfirend(clicked):                                 #---> The button_addfriend function takes 2 input from the user, one is his name and   
+    friend=E6.get()                                            #     other is the name of the friend which he wants to add to his friends list. 
+    friend = case_sensitivity(friend)                          #     This is neccessary to understand for a user that he should type a name which is in the social network
+    user=E1.get()                                              #     if friend will be already in users friend list it will return ' is already in you friend list'
+    user = case_sensitivity(user)                              #     and if friend is not in the friend list but in the social network then this button will add the friend in users friend list    
     if friend not in social_network or user not in social_network:
         user_not_in_socialnetwork(friend)
         return
@@ -148,12 +148,12 @@ def unfriend(social_network,user,remove_friend):      #--> The unfriend function
 
 
 
-#Button for Removing a Friend
+#Button for Removing a Friend                          
 
-def button_unfriend(clicked):
-    remove_friend = E6.get()
-    remove_friend = case_sensitivity(remove_friend)
-    user = E1.get()
+def button_unfriend(clicked):                         #---> The button_unfriend takes 2 input from user, one is for a friend to which he wants to remove from his freind list
+    remove_friend = E6.get()                          #      and other for user to inout his name it is similar to add friend function in which frind must be in the sociakl network  
+    remove_friend = case_sensitivity(remove_friend)   #      if friend is not in the list of users friend list then it will give ' is not in your friendlist.' 
+    user = E1.get()                                   #      if it is in the list then simply it will remove it by calling unfriend function
     user = case_sensitivity(user)
     if remove_friend not in social_network or user not in social_network:
         user_not_in_socialnetwork(remove_friend)
@@ -175,13 +175,11 @@ def get_friends_list(social_network, user):   #--> The get_friends_list function
         friends_list.append(friend)
     return friends_list 
 
-
-
 #Button For Viewing Friends
 
-def button_get_friends_list(clicked):
-    user = E1.get()
-    user = case_sensitivity(user)
+def button_get_friends_list(clicked):          #    The button_get_friends_list is taking input from user his name user should be in the social network, this functuion call the get_friends_list
+    user = E1.get()                            #    function if the user have no friends so it will return 'You have no friends.' otherwise it will return the list of friends a user have in this social network.
+    user = case_sensitivity(user)              #    below we have used features from tkinter and this function will display in the right hand side of the screen which is frame 2 
     if user not in social_network:
         user_not_in_socialnetwork(user)
         return
@@ -216,10 +214,10 @@ def get_mutual_friends(social_network, user1, user2):           #--> The get_mut
 
 #Button for Getting Mutual Friends
 
-def button_get_mutual_friends(clicked):
-    user1 = E1.get()
-    user1 = case_sensitivity(user1)
-    user2 = E6.get()
+def button_get_mutual_friends(clicked):                          #--. This button_get_mutual_function is taking two input one for user it self and anyother person in the social network
+    user1 = E1.get()                                             #    both the user must be in the social network if not then add them in to social network then this button function calls the get_mutual_friends function
+    user1 = case_sensitivity(user1)                              #    if both the user dont have any common friend then it will return on the right hand side of the screen that you and user2 dont have any mutual friends
+    user2 = E6.get()                                             #    if they have any mutual friend then it will give the list for mutual friend on the right hand side by clicking mutual friends button 
     user2 = case_sensitivity(user2)
     if user2 not in social_network or user1 not in social_network:
         user_not_in_socialnetwork(user2)
@@ -324,7 +322,7 @@ def get_user_profile(profiles, user):     #--> The get_user_profile function tak
 
 #Button for getting user's profile
 
-def button_get_user_profile(clicked):
+def button_get_user_profile(clicked):     #--> The button_get_user_profile takes two input and user must be in social network, 
     user = E1.get()
     user = case_sensitivity(user)
     if user not in social_network:
@@ -406,8 +404,8 @@ def get_recommended_friends(social_network, profiles, user):     #--> The get_re
 
 # Button for getting recommended friends
 
-def button_for_recommended_friends(clicked):
-    user=E1.get()
+def button_for_recommended_friends(clicked):            # The button_for_recommended_friends takes the input from user as his name which must be in the social network 
+    user=E1.get()                                       # and calls the function get_recommended_friends which return the recommended friends in the the listbox widget
     user = case_sensitivity(user)
     if user not in social_network:
         user_not_in_socialnetwork(user)
@@ -418,7 +416,7 @@ def button_for_recommended_friends(clicked):
     title = 'Recommended Friends for ' + user + ': '
     my_listbox.insert(0, title)
     my_listbox.insert(1, '')
-    for i in range(len(res)):
+    for i in range(len(res)):                           # The for loop here will give us the recommended friends in each seperate line
         ans = str(i+1) + '. ' + res[i][0]
         my_listbox.insert('end', ans)
 
@@ -478,9 +476,9 @@ def get_users_connection(social_network, user, target_user):    #--> The get_use
 
 #Button for user connection
 
-def button_get_users_connection(clicked):
-    user = E1.get()
-    user = case_sensitivity(user)
+def button_get_users_connection(clicked):       # It is taking inouts for user itself to type his name and the target user to which he wants a connection target and user must be in social network
+    user = E1.get()                             # We add the extra information by telling if there is an error in get connection then there is no connection between user and target user
+    user = case_sensitivity(user)               # if there is, then it will give in the listbox in right hand side.
     target_user = E6.get()
     target_user = case_sensitivity(target_user)
     if target_user not in social_network or user not in social_network:
@@ -497,7 +495,7 @@ def button_get_users_connection(clicked):
     my_listbox.insert(0, title)
     my_listbox.insert(1, '')
     for i in range(len(res)):
-        ans = str(i+1) + '. ' + res[i][0]
+        ans = str(i+1) + '. ' + res[i][0]           #these things add to return the connection in seperate line with each given the connection with user
         my_listbox.insert('end', ans)
         my_listbox.insert('end', '              |')
         my_listbox.insert('end', '             V')
@@ -506,99 +504,101 @@ def button_get_users_connection(clicked):
 
 # GUI Implementations 
 
-from tkinter import *
+from tkinter import *               # from here implementation of GUI is started we have used tkinter library to make GUI
 import tkinter.messagebox
 from tkinter import ttk
 import pickle
 
-root = Tk()
+root = Tk()                         # this will create a window and between this and main loop we have to work for GUI
 root.title("MINI-FACEBOOK")
 root.geometry('1920x1080')
 
 #Button for Clearing Window
 
-def ClearInfo():
+def ClearInfo():                    # this is a button in screen which use to destroy frame 2 item which is on the right hand side of the screen
     for widget in F2.winfo_children():
         widget.destroy()
 def clear_text():
-   E1.delete(0, END), E2.delete(0, END), E3.delete(0, END), E4.delete(0, END), E5.delete(0, END), E6.delete(0, END)
-
-# Label(root, text="FriendsConnect", font=("Arial bold", 30), fg="black").pack()
+   E1.delete(0, END), E2.delete(0, END), E3.delete(0, END), E4.delete(0, END), E5.delete(0, END), E6.delete(0, END) # this function is used to clear the names which user added 
   
 # Display the image shown "the soical network"
 
-canvas1 = Canvas( root, width = 20, height = 20)
-b = PhotoImage(file = "tsn.png")
+canvas1 = Canvas( root, width = 20, height = 20)    # so if you see the top image in which ' the user connection' is written we use that photo for our title  
+b = PhotoImage(file = "tsn.png")                    # we take that photo by using PhotoImage widget.
 canvas1.create_image( 0, 0, image = b)
 Label(root, image=b, width='2000', height='115', bg='#405898').pack()
-F1= Frame(root,borderwidth=2, relief='sunken', bg='#405898', bd='10')
+
+# Frames
+F1= Frame(root,borderwidth=2, relief='sunken', bg='#405898', bd='10') # these are frame 1 and frame 2 in the screen in which right hand side frame use for user input and buttons to click 
 F1.pack(side="left", expand=True, fill="both")
-F2= Frame(root,borderwidth=2, relief="sunken", bg='#405898', bd='20')
+F2= Frame(root,borderwidth=2, relief="sunken", bg='#405898', bd='20')# and left hand side frame use to display the output 
 F2.pack(side="right", expand=True, fill="both")
 
 # ALL THE BUTTONS IMPLEMENTED
-
+#Note that here if you see row and column equal to some number that is the number for each row and column like where selected item will be represented in the frame
+# We have used tkinter library which we have learned from this link https://www.tutorialspoint.com/python/tk_listbox.htm.
+# this site have all the information which we have used above and below to create GUI
 #Entry 1: Name
-Label(F1,text="Enter your Name:", bg='#405898', bd='3', font=('calibri bold', 15), fg='white').grid(row=0, sticky=W,padx=10)
-E1= Entry(F1,bd=2)
+Label(F1,text="Enter your Name:", bg='#405898', bd='3', font=('calibri bold', 15), fg='white').grid(row=0, sticky=W,padx=10)#--> use to tell the use to input his name
+E1= Entry(F1,bd=2)                    #--> create an Entry for user to write his name 
 E1.grid(row=0,column=1,padx=5,pady=12)
 
 #Entry 2: Age
-Label(F1,text="Enter your Age:", bg='#405898', bd='3', font=('calibri bold', 15), fg='white').grid(row=1,sticky=W, padx=10)
-E2= Entry(F1,bd=2)
+Label(F1,text="Enter your Age:", bg='#405898', bd='3', font=('calibri bold', 15), fg='white').grid(row=1,sticky=W, padx=10)#--> use to tell the user to input his age
+E2= Entry(F1,bd=2)      #--> create an Entry for user to write his age
 E2.grid(row=1,column=1,padx=13,pady=12)
 
 #Entry 3: Country
-Label(F1,text="Enter your Country:", bg=('#405898'), bd='3', font=('calibri bold', 15), fg='white').grid(row=2,sticky=W, padx=10)
-E3= Entry(F1,bd=2)
+Label(F1,text="Enter your Country:", bg=('#405898'), bd='3', font=('calibri bold', 15), fg='white').grid(row=2,sticky=W, padx=10)#--> use to tell the user to input his country
+E3= Entry(F1,bd=2)        #--> create an Entry for user to write his country
 E3.grid(row=2,column=1,padx=13,pady=12)
 
 #Entry 4: Department
-Label(F1,text="Enter your Department:", bg='#405898', bd='3', font=('calibri bold', 15), fg='white', anchor='center').grid(row=3,sticky=W, padx=10)
-E4= Entry(F1,bd=2)
+Label(F1,text="Enter your Department:", bg='#405898', bd='3', font=('calibri bold', 15), fg='white', anchor='center').grid(row=3,sticky=W, padx=10)#--> use to tell the user to input his department
+E4= Entry(F1,bd=2)      #--> create an Entry for user to write his department
 E4.grid(row=3,column=1,padx=13,pady=12)
 
 #Entry 5: Hobbies
-Label(F1,text="Enter your Hobbies:", bg='#405898', bd='3', font=('calibri bold', 15), fg='white').grid(row=4,sticky=W, padx=10)
-E5= Entry(F1,bd=2)
+Label(F1,text="Enter your Hobbies:", bg='#405898', bd='3', font=('calibri bold', 15), fg='white').grid(row=4,sticky=W, padx=10)#--> use to tell the user to input his hobbies
+E5= Entry(F1,bd=2)           #--> create an Entry for user to write his hobbies
 E5.grid(row=4,column=1,padx=13,pady=12)
 
 #Entry 6: Friend's Name
-Label(F1, text="Enter your friend name's:", bg='#405898', bd='3', font=('calibri bold', 15), fg='white').grid(row=40, sticky=W, padx=10)
-E6=Entry(F1,bd=2)
+Label(F1, text="Enter your friend name's:", bg='#405898', bd='3', font=('calibri bold', 15), fg='white').grid(row=40, sticky=W, padx=10)#--> use to tell the user to input his freind name
+E6=Entry(F1,bd=2)          #--> create an Entry for user to write his friend name
 E6.grid(row=40,column=1,padx=13,pady=12)
 
-# View Friendlist button
+# View Friendlist button                                   
 View_Friends=Button(F1, text='View My Friendlist', command="c", padx=13, pady=10, activebackground='light blue', activeforeground='red', bg='#778899', fg='white', font=('calibri bold', 15), bd=2)
-View_Friends.grid(row=60,column=0,sticky=NSEW,padx=13,pady=10)
+View_Friends.grid(row=60,column=0,sticky=NSEW,padx=13,pady=10)  #these three lines create the button in frame 1 which is left hand side of the screen and from where when user click the button it will diplay the output for that particular function
 View_Friends.bind('<Button-1>', button_get_friends_list)
 
 # Clear the entered data button
 clearButton = Button(F1,text="Clear Entry Data", command=clear_text, padx=13, pady=10,  activebackground='light blue', activeforeground='red', bg='#778899', fg='white', font=('calibri bold', 15), bd=2)
-clearButton.grid(row=100,column=1,sticky=NSEW,padx=13,pady=10)
+clearButton.grid(row=100,column=1,sticky=NSEW,padx=13,pady=10) # simillarly creating a button for clear enrty
 
 # Clear the information on the right button
 Clear=Button(F1, text='Clear', command=ClearInfo, padx=13, pady=10,  activebackground='light blue', activeforeground='red', bg='#778899', fg='white', font=('calibri bold', 15), bd=2, height=1, width=1)
-Clear.grid(row=100,column=0,sticky=NSEW,padx=13,pady=10)
+Clear.grid(row=100,column=0,sticky=NSEW,padx=13,pady=10) #again creating button for clear information
 
 # Save a profile button
 Save_Profile=Button(F1, text='Save Profile', command="c", padx=13, pady=10,  activebackground='light blue', activeforeground='red', bg='#778899', fg='white', font=('calibri bold', 15), bd=2)
-Save_Profile.grid(row=60,column=1,sticky=NSEW,padx=13,pady=10)
+Save_Profile.grid(row=60,column=1,sticky=NSEW,padx=13,pady=10) # these 3 line for crearting button for save profile in which we call here save_user_profile function which will display when user click it
 Save_Profile.bind('<Button-1>', save_user_profile)
 
 # View a profile button
 View_Profile=Button(F1, text='View Profile', command="c", padx=13, pady=10,  activebackground='light blue', activeforeground='red', bg='#778899', fg='white', font=('calibri bold', 15), bd=2)
-View_Profile.grid(row=80,column=1,sticky=NSEW,padx=13,pady=10)
+View_Profile.grid(row=80,column=1,sticky=NSEW,padx=13,pady=10) # button for view profile when user click it then the code display the output of the function which we have called here
 View_Profile.bind('<Button-1>', button_get_user_profile)
 
 # Friend recommendation button
 View_recommended_friends=Button(F1, text='Recommended Friends', command='c', padx=13, pady=10,  activebackground='light blue', activeforeground='red', bg='#778899', fg='white', font=('calibri bold', 15), bd=2)
-View_recommended_friends.grid(row=80,column=0,sticky=NSEW,padx=13,pady=10)
+View_recommended_friends.grid(row=80,column=0,sticky=NSEW,padx=13,pady=10) #simillarly here creating a button and calling it 
 View_recommended_friends.bind('<Button-1>', button_for_recommended_friends)
 
 # Add a friend button
 Add_friend=Button(F1, text='Add Friend', command='c', padx=13, pady=10,  activebackground='light blue', activeforeground='red', bg='green', fg='white', font=('calibri bold', 15), bd=2)
-Add_friend.grid(row=40,column=2,sticky=NSEW,padx=10,pady=10)
+Add_friend.grid(row=40,column=2,sticky=NSEW,padx=10,pady=10) #we have create 10 buttons and almost in every button we use simillar technique except calling a different function in every button 
 Add_friend.bind('<Button-1>', button_addfirend)
 
 # Unfriend button 
@@ -615,5 +615,4 @@ View_Mutual_Friends.bind('<Button-1>', button_get_mutual_friends)
 View_Users_Connection=Button(F1, text="User's Connection", command='c', padx=13, pady=10,  activebackground='light blue', activeforeground='red', bg='#778899', fg='white', font=('calibri bold', 15), bd=2)
 View_Users_Connection.grid(row=100,column=2,sticky=NSEW,padx=13,pady=10)
 View_Users_Connection.bind('<Button-1>', button_get_users_connection)
-
-root.mainloop()
+root.mainloop() # end :)
