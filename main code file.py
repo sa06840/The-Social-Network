@@ -6,9 +6,10 @@
 def get_profile_in_list(profiles, user):
     lst = []
     for i in profiles[user]:
-        elem = i[1].split(', ')
+        elem = i[1].split(',')
         for j in elem:
-            lst.append(j)
+            print(j.lstrip())
+            lst.append(j.strip())
     return lst
 
 def is_empty(lst):
@@ -57,6 +58,7 @@ def get_cost(social_network, profiles, user):
 def case_sensitivity(name):
     lowered_name = name.lower()
     fixed_name = lowered_name.title()
+    fixed_name = fixed_name.strip()
     return fixed_name
 
 def user_not_in_socialnetwork(name):
@@ -322,6 +324,7 @@ def save_user_profile(clicked):
         label = Label(F2, text = 'Please enter a number for your age.')
         label.pack()
         return
+    age = case_sensitivity(age)
     country = E3.get()
     country = case_sensitivity(country)
     department = E4.get()
