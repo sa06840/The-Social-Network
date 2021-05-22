@@ -1,5 +1,5 @@
 
-#Mini Facebook
+# The Social Network
 
 #Helper Functions
 
@@ -537,13 +537,13 @@ def button_get_users_connection(clicked):
     last = str(i+2) + '. ' + target_user
     my_listbox.insert('end', last)
 
+# GUI Implementations 
 
 from tkinter import *
 import tkinter.messagebox
 from tkinter import ttk
 import pickle
 
-#GUI
 root = Tk()
 root.title("MINI-FACEBOOK")
 root.geometry('1920x1080')
@@ -557,12 +557,11 @@ def clear_text():
    E1.delete(0, END), E2.delete(0, END), E3.delete(0, END), E4.delete(0, END), E5.delete(0, END), E6.delete(0, END)
 
 # Label(root, text="FriendsConnect", font=("Arial bold", 30), fg="black").pack()
-b = PhotoImage(file = "tsn.png")
   
-# Create Canvas
+# Display the image shown "the soical network"
+
 canvas1 = Canvas( root, width = 20, height = 20)
-  
-# Display image
+b = PhotoImage(file = "tsn.png")
 canvas1.create_image( 0, 0, image = b)
 Label(root, image=b, width='2000', height='115', bg='#405898').pack()
 F1= Frame(root,borderwidth=2, relief='sunken', bg='#405898', bd='10')
@@ -570,67 +569,84 @@ F1.pack(side="left", expand=True, fill="both")
 F2= Frame(root,borderwidth=2, relief="sunken", bg='#405898', bd='20')
 F2.pack(side="right", expand=True, fill="both")
 
+# ALL THE BUTTONS IMPLEMENTED
+
+#Entry 1: Name
 Label(F1,text="Enter your Name:", bg='#405898', bd='3', font=('calibri bold', 15), fg='white').grid(row=0, sticky=W,padx=10)
 E1= Entry(F1,bd=2)
 E1.grid(row=0,column=1,padx=5,pady=12)
 
+#Entry 2: Age
 Label(F1,text="Enter your Age:", bg='#405898', bd='3', font=('calibri bold', 15), fg='white').grid(row=1,sticky=W, padx=10)
 E2= Entry(F1,bd=2)
 E2.grid(row=1,column=1,padx=13,pady=12)
 
+#Entry 3: Country
 Label(F1,text="Enter your Country:", bg=('#405898'), bd='3', font=('calibri bold', 15), fg='white').grid(row=2,sticky=W, padx=10)
 E3= Entry(F1,bd=2)
 E3.grid(row=2,column=1,padx=13,pady=12)
 
+#Entry 4: Department
 Label(F1,text="Enter your Department:", bg='#405898', bd='3', font=('calibri bold', 15), fg='white', anchor='center').grid(row=3,sticky=W, padx=10)
 E4= Entry(F1,bd=2)
 E4.grid(row=3,column=1,padx=13,pady=12)
 
+#Entry 5: Hobbies
 Label(F1,text="Enter your Hobbies:", bg='#405898', bd='3', font=('calibri bold', 15), fg='white').grid(row=4,sticky=W, padx=10)
 E5= Entry(F1,bd=2)
 E5.grid(row=4,column=1,padx=13,pady=12)
 
+#Entry 6: Friend's Name
 Label(F1, text="Enter your friend name's:", bg='#405898', bd='3', font=('calibri bold', 15), fg='white').grid(row=40, sticky=W, padx=10)
 E6=Entry(F1,bd=2)
 E6.grid(row=40,column=1,padx=13,pady=12)
 
+# View Friendlist button
 View_Friends=Button(F1, text='View My Friendlist', command="c", padx=13, pady=10, activebackground='light blue', activeforeground='red', bg='#778899', fg='white', font=('calibri bold', 15), bd=2)
 View_Friends.grid(row=60,column=0,sticky=NSEW,padx=13,pady=10)
 View_Friends.bind('<Button-1>', button_get_friends_list)
 
+# Clear the entered data button
 clearButton = Button(F1,text="Clear Entry Data", command=clear_text, padx=13, pady=10,  activebackground='light blue', activeforeground='red', bg='#778899', fg='white', font=('calibri bold', 15), bd=2)
 clearButton.grid(row=100,column=1,sticky=NSEW,padx=13,pady=10)
 
+# Clear the information on the right button
 Clear=Button(F1, text='Clear', command=ClearInfo, padx=13, pady=10,  activebackground='light blue', activeforeground='red', bg='#778899', fg='white', font=('calibri bold', 15), bd=2, height=1, width=1)
 Clear.grid(row=100,column=0,sticky=NSEW,padx=13,pady=10)
 
+# Save a profile button
 Save_Profile=Button(F1, text='Save Profile', command="c", padx=13, pady=10,  activebackground='light blue', activeforeground='red', bg='#778899', fg='white', font=('calibri bold', 15), bd=2)
 Save_Profile.grid(row=60,column=1,sticky=NSEW,padx=13,pady=10)
 Save_Profile.bind('<Button-1>', save_user_profile)
 
+# View a profile button
 View_Profile=Button(F1, text='View Profile', command="c", padx=13, pady=10,  activebackground='light blue', activeforeground='red', bg='#778899', fg='white', font=('calibri bold', 15), bd=2)
-View_Profile.grid(row=80,column=2,sticky=NSEW,padx=13,pady=10)
+View_Profile.grid(row=80,column=1,sticky=NSEW,padx=13,pady=10)
 View_Profile.bind('<Button-1>', button_get_user_profile)
 
+# Friend recommendation button
 View_recommended_friends=Button(F1, text='Recommended Friends', command='c', padx=13, pady=10,  activebackground='light blue', activeforeground='red', bg='#778899', fg='white', font=('calibri bold', 15), bd=2)
 View_recommended_friends.grid(row=80,column=0,sticky=NSEW,padx=13,pady=10)
 View_recommended_friends.bind('<Button-1>', button_for_recommended_friends)
 
+# Add a friend button
 Add_friend=Button(F1, text='Add Friend', command='c', padx=13, pady=10,  activebackground='light blue', activeforeground='red', bg='green', fg='white', font=('calibri bold', 15), bd=2)
 Add_friend.grid(row=40,column=2,sticky=NSEW,padx=10,pady=10)
 Add_friend.bind('<Button-1>', button_addfirend)
 
+# Unfriend button 
 Unfriend=Button(F1, text='Unfriend', command='c', padx=13, pady=10,  activebackground='light blue', activeforeground='red', bg='#8B0000', fg='white', font=('calibri bold', 15), bd=2, width=10)
 Unfriend.grid(row=60,column=2,sticky=NSEW,padx=10,pady=10,)
-
 Unfriend.bind('<Button-1>', button_unfriend)
 
+# Mutual Friends button
 View_Mutual_Friends=Button(F1, text='Mutual Friends', command='c', padx=13, pady=10,  activebackground='light blue', activeforeground='red', bg='#778899', fg='white', font=('calibri bold', 15), bd=2)
-View_Mutual_Friends.grid(row=80,column=1,sticky=NSEW,padx=13,pady=10)
+View_Mutual_Friends.grid(row=80,column=2,sticky=NSEW,padx=13,pady=10)
 View_Mutual_Friends.bind('<Button-1>', button_get_mutual_friends)
 
+# User's connection button
 View_Users_Connection=Button(F1, text="User's Connection", command='c', padx=13, pady=10,  activebackground='light blue', activeforeground='red', bg='#778899', fg='white', font=('calibri bold', 15), bd=2)
 View_Users_Connection.grid(row=100,column=2,sticky=NSEW,padx=13,pady=10)
 View_Users_Connection.bind('<Button-1>', button_get_users_connection)
-# root.tk.call('tk', 'scaling', 1.0)
+
 root.mainloop()
