@@ -95,8 +95,8 @@ social_network = constructing_social_network(matrix_of_friendships)
 
 #Test Case
 
-user = 'Shah Jamal Alam'          #--> This is a test case which acts as an input for the functions initially. You are free to alter it but do not delete it.
-age = '35'
+user = 'Shah Jamal Alam'          #--> This is a test case which acts as an input for the functions initially.
+age = '35'                        #    You are free to alter it but do not delete it.
 country = 'New Zealand'
 department = 'Data Structures and Algorithms'
 hobbies = 'Cooking, Snooker'
@@ -286,19 +286,19 @@ profiles = fixing_user_profile(profiles_temp, user, age, country, department, ho
 
 #Button for saving profile
 
-def save_user_profile(clicked):
-    user = E1.get()
+def save_user_profile(clicked):                               #--> This button allows you to save user's profile that was entered.
+    user = E1.get()                                           #    It is also case sensitive 
     user = case_sensitivity(user)
     if user == '':
         label = Label(F2, text = 'Please enter your name.')
         label.pack()
         return
-    age = E2.get()
-    if '-' in age:
+    age = E2.get()                                            # Checks if the age has a negative sign, if not it will ask you to enter
+    if '-' in age:                                            # a valid age.
         label = Label(F2, text = 'Please enter a valid age.')
         label.pack()
         return
-    elif age.isdigit() == False and age != '':
+    elif age.isdigit() == False and age != '':                # Checks if the age is an integer, if not it ask you to enter a number.
         label = Label(F2, text = 'Please enter a number for your age.')
         label.pack()
         return
@@ -328,9 +328,7 @@ def get_user_profile(profiles, user):     #--> The get_user_profile function tak
 # and they have not inputted a friend's name, the user's profile is displayed. However, if they have inputted a friend's name, 
 # the friend's profile is displayed as long as they are in the social_network. 
 # If the friend is not in the social_network, the user_not_in_socialnetwork function is called and the function terminates.
-#   ^^   ^^
-#   ||   ||   
-#   ||   || 
+
 def button_get_user_profile(clicked):      
     user = E1.get()
     user = case_sensitivity(user)
