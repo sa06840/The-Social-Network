@@ -95,7 +95,7 @@ social_network = constructing_social_network(matrix_of_friendships)
 
 #Test Case
 
-user = 'Shah Jamal Alam'                      #--> This is a test case which acts as an input for the functions initially. You are free to alter it but do not delete it.
+user = 'Shah Jamal Alam'          #--> This is a test case which acts as an input for the functions initially. You are free to alter it but do not delete it.
 age = '35'
 country = 'New Zealand'
 department = 'Data Structures and Algorithms'
@@ -108,6 +108,7 @@ def add_friend(social_network, profiles, user, friend):       #--> The add_frien
     if get_friends_list(social_network, user) == []:          #    friend's name as inputs. It then adds the friend in the user's friend list and adds the user
         weight = random.randint(1,10)                         #    in the friend's friend list. The friend's cost from the user is also added for further use.
         social_network[user].append((friend, weight))         #    It then returns the updated social_network.
+        social_network[friend].append((user, weight))
         return social_network
     cost_dictionary = get_cost(social_network, user)
     cost = cost_dictionary[friend]
@@ -512,40 +513,39 @@ def button_get_users_connection(clicked):       # It is taking inouts for user i
 
 # GUI Implementations 
 
-from tkinter import *               # from here implementation of GUI is started we have used tkinter library to make GUI
+from tkinter import *   
 import tkinter.messagebox
 from tkinter import ttk
 import pickle
 
-root = Tk()                         # this will create a window and between this and main loop we have to work for GUI
-root.title("MINI-FACEBOOK")
+root = Tk()           # this will create a window and between this and main loop we have to work for GUI
+root.title("TSN")
 root.geometry('1920x1080')
 
-#Button for Clearing Window
+# Functions for Clearing Window
 
-def ClearInfo():                    # this is a button in screen which use to destroy frame 2 item which is on the right hand side of the screen
+def ClearInfo():      # Clears the output shown on Frame 2
     for widget in F2.winfo_children():
         widget.destroy()
+        
 def clear_text():
-   E1.delete(0, END), E2.delete(0, END), E3.delete(0, END), E4.delete(0, END), E5.delete(0, END), E6.delete(0, END) # this function is used to clear the names which user added 
+   E1.delete(0, END), E2.delete(0, END), E3.delete(0, END), E4.delete(0, END), E5.delete(0, END), E6.delete(0, END) # Clears the names which user added 
   
-# Display the image shown "the soical network"
-
-canvas1 = Canvas( root, width = 20, height = 20)    # so if you see the top image in which ' the user connection' is written we use that photo for our title  
-b = PhotoImage(file = "tsn.png")                    # we take that photo by using PhotoImage widget.
+# Displays the image shown "the social network"
+canvas1 = Canvas( root, width = 20, height = 20)    
+b = PhotoImage(file = "tsn.png")                   
 canvas1.create_image( 0, 0, image = b)
 Label(root, image=b, width='2000', height='115', bg='#405898').pack()
 
 # Frames
-F1= Frame(root,borderwidth=2, relief='sunken', bg='#405898', bd='10') # these are frame 1 and frame 2 in the screen in which right hand side frame use for user input and buttons to click 
+F1= Frame(root,borderwidth=2, relief='sunken', bg='#405898', bd='10') # Frame 1: left hand side for user to input and buttons displayed
 F1.pack(side="left", expand=True, fill="both")
-F2= Frame(root,borderwidth=2, relief="sunken", bg='#405898', bd='20')# and left hand side frame use to display the output 
+F2= Frame(root,borderwidth=2, relief="sunken", bg='#405898', bd='20') # Frame 2: right hand side uses to display the output 
 F2.pack(side="right", expand=True, fill="both")
 
 # ALL THE BUTTONS IMPLEMENTED
-#Note that here if you see row and column equal to some number that is the number for each row and column like where selected item will be represented in the frame
-# We have used tkinter library which we have learned from this link https://www.tutorialspoint.com/python/tk_listbox.htm.
-# this site have all the information which we have used above and below to create GUI
+# Note that here if you see row and column equal to some number that is the number for each row and column like where selected item will be represented in the frame
+
 #Entry 1: Name
 Label(F1,text="Enter your Name:", bg='#405898', bd='3', font=('calibri bold', 15), fg='white').grid(row=0, sticky=W,padx=10)#--> use to tell the use to input his name
 E1= Entry(F1,bd=2)                    #--> create an Entry for user to write his name 
@@ -623,4 +623,5 @@ View_Mutual_Friends.bind('<Button-1>', button_get_mutual_friends)
 View_Users_Connection=Button(F1, text="User's Connection", command='c', padx=13, pady=10,  activebackground='light blue', activeforeground='red', bg='#778899', fg='white', font=('calibri bold', 15), bd=2)
 View_Users_Connection.grid(row=100,column=2,sticky=NSEW,padx=13,pady=10)
 View_Users_Connection.bind('<Button-1>', button_get_users_connection)
-root.mainloop() # end :)
+
+root.mainloop() # Keeps the GUI running
