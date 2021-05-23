@@ -321,8 +321,16 @@ def get_user_profile(profiles, user):     #--> The get_user_profile function tak
 
 
 #Button for getting user's profile
-
-def button_get_user_profile(clicked):     #--> The button_get_user_profile takes two input and user must be in social network, 
+# The button_get_user_profile function takes the user's name and the friend's name as inputs. This friend can be any person in 
+# the social_network. 
+# If the user is not in the social_network, it calls the user_not_in_socialnetwork function and terminates. If the user is in the social_network 
+# and they have not inputted a friend's name, the user's profile is displayed. However, if they have inputted a friend's name, 
+# the friend's profile is displayed as long as they are in the social_network. 
+# If the friend is not in the social_network, the user_not_in_socialnetwork function is called and the function terminates.
+#   ^^   ^^
+#   ||   ||   
+#   ||   || 
+def button_get_user_profile(clicked):      
     user = E1.get()
     user = case_sensitivity(user)
     if user not in social_network:
