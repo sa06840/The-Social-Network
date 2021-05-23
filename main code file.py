@@ -95,7 +95,7 @@ social_network = constructing_social_network(matrix_of_friendships)
 
 #Test Case
 
-user = 'Shah Jamal Alam'                      #--> This is a test case which acts as an input for the functions initially. You are free to alter it but do not delete it.
+user = 'Shah Jamal Alam'          #--> This is a test case which acts as an input for the functions initially. You are free to alter it but do not delete it.
 age = '35'
 country = 'New Zealand'
 department = 'Data Structures and Algorithms'
@@ -512,7 +512,7 @@ from tkinter import ttk
 import pickle
 
 root = Tk()
-root.title("MINI-FACEBOOK")
+root.title("TSN")
 root.geometry('1920x1080')
 
 #Button for Clearing Window
@@ -525,7 +525,7 @@ def clear_text():
 
 # Label(root, text="FriendsConnect", font=("Arial bold", 30), fg="black").pack()
   
-# Display the image shown "the soical network"
+# Display the image shown "the social network"
 
 canvas1 = Canvas( root, width = 20, height = 20)
 b = PhotoImage(file = "tsn.png")

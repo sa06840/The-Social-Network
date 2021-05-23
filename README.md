@@ -1,6 +1,6 @@
 # The Social Network
 
-![Project Image](https://fanart.tv/fanart/movies/37799/hdmovielogo/the-social-network-503d2d7f8e7c1.png)
+![Project Image](https://www.lifewire.com/thmb/APU8f0VircabGwdVxDi14-Zximo=/768x0/filters:no_upscale():max_bytes(150000):strip_icc()/GettyImages-537468878-7953d9ee336740339d2f8badb9436034.jpg)
 
 > This is a ReadMe file to help save you time and effort.
 
@@ -14,7 +14,7 @@ You're sections headers will be used to reference location of destination.
 - [How To Use](#how-to-use)
 - [How to run the file](#how-to-run-the-file)
 - [References](#references)
-- [Author Info](#author-info)
+- [Contributors](#contributors)
 
 ---
 
@@ -105,7 +105,7 @@ Tkinter Tutorial -  https://youtu.be/YXPyB4XeYLA
 
 ---
 
-## Conrtributors 
+## Contributors
 
 - Sajeel Alam - [sa06840](https://github.com/sa06840)
 - Zaviar Khan - [Zav06838](https://github.com/Zav06838)
@@ -114,3 +114,4 @@ Tkinter Tutorial -  https://youtu.be/YXPyB4XeYLA
 
 [Back To The Top](#The-Social-Network)
 
+ 
