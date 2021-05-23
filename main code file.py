@@ -108,6 +108,7 @@ def add_friend(social_network, profiles, user, friend):       #--> The add_frien
     if get_friends_list(social_network, user) == []:          #    friend's name as inputs. It then adds the friend in the user's friend list and adds the user
         weight = random.randint(1,10)                         #    in the friend's friend list. The friend's cost from the user is also added for further use.
         social_network[user].append((friend, weight))         #    It then returns the updated social_network.
+        social_network[friend].append((user, weight))
         return social_network
     cost_dictionary = get_cost(social_network, user)
     cost = cost_dictionary[friend]
