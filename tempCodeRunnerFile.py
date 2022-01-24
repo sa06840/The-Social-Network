@@ -1,0 +1,1 @@
+E1.grid(row=0,column=1,padx=5,pady=12)
